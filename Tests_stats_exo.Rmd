@@ -19,16 +19,16 @@ library(gradethis)
 Sys.setlocale("LC_ALL", "fr_FR.UTF-8")
 gradethis_setup()
  
-knitr::opts_chunk$set(echo = FALSE)
+knitr::opts_chunk$set(echo = FALSE, message=FALSE, warning=FALSE)
 
-library(tidyverse)
-library(gridExtra)
+library(dplyr)
+library(tibble)
+library(ggplot2)
 library(purrr)
-library(magrittr)
+library(gridExtra)
 library(gganimate)
 library(infer)
 source("scripts/utils2.R")
-#knitr::opts_chunk$set(echo = TRUE, message=FALSE, warning=FALSE)
 
 chateauxEtBoulots=read.csv("http://perso.ens-lyon.fr/lise.vaudor/grimoireStat/datasets/chateauxEtBoulots.csv",
                            header=TRUE, sep=",")
@@ -1143,7 +1143,7 @@ grViz('digraph infer_workflow {
   }
 
   # Ajouter les connexions principales
-  A -> B  [label = "<B>specify()</B> : Spécifier le modèle"]
+  A -> B  [label = "<b>specify()</b> : Spécifier le modèle"]
   B -> C  [label = "hypothesize(): Formuler l hypothèse nulle"]
   C -> D  [style = dashed, label = "generate() : Générer les données sous H0 (permutation/bootstrap)"]
   D -> E  [style = dashed, label="Calculer la distribution de la statistique sous H0"]

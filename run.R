@@ -1,0 +1,1 @@
+rmarkdown::run("Tests_stats_exo.Rmd", shiny_args = list(host="0.0.0.0", port=3840))
