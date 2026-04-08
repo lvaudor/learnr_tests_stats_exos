@@ -29,6 +29,8 @@ library(gridExtra)
 library(gganimate)
 library(infer)
 source("scripts/utils2.R")
+library(DiagrammeR)
+
 
 chateauxEtBoulots=read.csv("http://perso.ens-lyon.fr/lise.vaudor/grimoireStat/datasets/chateauxEtBoulots.csv",
                            header=TRUE, sep=",")
@@ -206,16 +208,17 @@ ggplot(broceliande, aes(x=enchantement, y=perlimpinpin))+
 A la vue du graphique et du tableau ci-dessus, on a bien l'impression que la quantité de perlimpinpin est plus importante pour les arbres enchantés que pour les autres, mais...
 
 
-<!-- ```{r inference_mentale} -->
-<!-- question("Est-ce un effet réel ou simplement dû au hasard, à votre avis? (plusieurs réponses possibles)", -->
-<!--     answer("Probablement lié au hasard, car les distributions des deux groupes ne sont pas totalement disjointes."), -->
-<!--     answer("Probablement lié au hasard, car les échantillons sont de tailles très inégales."), -->
-<!--     answer("Probablement réel, car les tailles d'échantillon sont relativement importantes", correct=TRUE), -->
-<!--     incorrect="Eh non, a priori les tailles d'échantillon iraient plutôt dans le sens d'un effet réel", -->
-<!--     correct="Oui! Vu les tailles d'échantillon importantes et l'allure de la distribution par groupe, on peut penser que l'effet observé est réel.", -->
-<!--     allow_retry=TRUE -->
-<!-- ) -->
-<!-- ``` -->
+
+```{r inference_mentale}
+question("Est-ce un effet réel ou simplement dû au hasard, à votre avis? (plusieurs réponses possibles)",
+    answer("Probablement <b>lié au hasard</b>, car les distributions des deux groupes ne sont <b>pas totalement disjointes</b>."),
+    answer("Probablement <b>lié au hasard</b>, car les échantillons sont de <b>tailles très inégales.</b>"),
+    answer("Probablement <b>réel</b>, car les <b>tailles d'échantillon sont relativement importantes</b>", correct=TRUE),
+    incorrect="Eh non, a priori les tailles d'échantillon iraient plutôt dans le sens d'un <b>effet réel</b>",
+    correct="Oui! Vu <b>les tailles d'échantillon importantes</b> et l'<b>allure de la distribution</b> par groupe, on peut penser que l'effet observé est <b>réel</b>.",
+    allow_retry=TRUE
+)
+```
 
 Avec la question ci-dessus, j'essaie de vous montrer que vous êtes capables de faire des **inférences "non-statistiques"**, qui font en fait appel à des notions de taille d'échantillon et de distribution des données qui sont fondamentales pour la réalisation de tests statistiques.
 
@@ -308,7 +311,8 @@ library(infer)
    specify(perlimpinpin ~ enchantement) 
  theory=model %>%
    assume(distribution="t")
- stat= model %>% calculate(stat="t", order=c("TRUE","FALSE")) %>% pull(stat)
+ stat= model %>%
+   calculate(stat="t", order=c("TRUE","FALSE")) %>% pull(stat)
  
 visualise(theory)+shade_p_value(stat,direction="greater") 
 ```
@@ -326,19 +330,21 @@ Si la p-value est particulièrement petite, cela tend à prouver que **la valeur
 
 La valeur $\alpha$ est souvent, par convention, 5\% (il arrive aussi que l'on voie 10\%, 1\%, etc.). Cette valeur **n'est pas un repère absolu** (si vous êtes à 5.1\% plutôt qu'à 4.9\% ça ne devrait pas *fondamentalement* changer votre conclusion...).
 
+
 ```{r ttest_questions2}
 question("Cochez les affirmations correctes",
-         answer("La valeur de la statistique observée dépend des données", correct=TRUE),
-         answer("La distribution de la statistique T sous hypothèse H0 est une distribution de Student et ne dépend pas des données"),
-         answer("La p-value peut prendre des valeurs entre -1 et 1."),
-         answer("Plus la p-value est proche de 0, plus il y a des chances que l'on rejette H0" , correct=TRUE),
-         answer("Si la p-value est égale à 0.04, alors je peux rejeter H0 au seuil de 1% et conclure à un effet significatif"),
-         answer ("Si la p-value est égale à 0.1, alors je peux rejeter H0 au seuil de 5% et conclure à un effet significatif"),
-         incorrect="Attention il y a quelques petits pièges: la loi de Student a un paramètre (qui dépend bien des données), une p-value est une probabilité et ne peut pas être négative, et 0.04 correspond à 4% et 0.1 à 10%",
+         answer("La valeur de la <b>statistique observée</b> dépend des <b>données</b>", correct=TRUE),
+         answer("La <b>distribution de la statistique T sous hypothèse H0</b> est une <b>distribution de Student</b> et ne dépend <b>pas</b> des données"),
+         answer("La <b>p-value</b> peut prendre des valeurs entre <b>-1 et 1</b>."),
+         answer("Plus la p-value est <b>proche de 0</b>, plus il y a des chances que l'on <b>rejette H0</b>" , correct=TRUE),
+         answer("Si la p-value est égale à <b>0.04</b>, alors je peux <b>rejeter H0</b> au seuil de <b>5%</b> et conclure à un <b>effet significatif</b>", correct=TRUE),
+         answer ("Si la p-value est égale à <b>0.1</b>, alors je peux <b>rejeter H0</b> au seuil de <b>5%</b> et conclure à un <b>effet significatif</b>"),
+         incorrect="Attention il y a quelques petits pièges: la loi de Student a un <b>paramètre (qui dépend bien des données)</b>, une p-value est une <b>probabilité</b> et ne peut pas être négative, et 0.04 correspond à 4% et 0.1 à 10%",
          correct="Oui! C'est une gymnastique mentale mais une fois que c'est intégré c'est comme le vélo...",
          allow_retry=TRUE
 )
 ```
+
 
 ## --- 2.3 Erreurs
 
@@ -362,14 +368,15 @@ La **puissance d'un test** est égale à 1-$\beta$ i.e. elle correspond à la pr
 
 Quand on choisit de réaliser un test avec un risque $\alpha$ particulièrement bas, alors le risque $\beta$ est particulièrement élevé, c'est à dire qu'on le fait au détriment de la **puissance** du test (c'est-à-dire que plus on minimise le risque de dire qu'il y a un effet alors qu'il n'y en a pas, plus on maximise le risque de "passer à côté" d'un effet qui existe).
 
+
 ```{r ttest_questions3}
 question("Cochez les affirmations correctes",
-          answer("Les tests statistiques permettent de ne jamais faire d'erreur d'interprétation"),
-          answer("Quand on choisit le seuil alpha pour réaliser un test, on choisit en fait le risque d'erreur de type I", correct=TRUE),
-          answer("beta=1-alpha"),
-          answer("Généralement, on cherche à valider H0"),
-          answer("Généralement, on cherche à 'prouver' qu'il existe un effet de X sur Y", correct=TRUE), 
-          incorrect="Malheureusement, recourir à un test statistique ne nous prémunit pas de faire des erreurs d'interprétation et il faut toujours faire des compromis entre les risques d'erreur de type I et de type II",
+          answer("Les tests statistiques permettent (quand ils sont appliqués correctement) de <b>ne jamais faire d'erreur d'interprétation</b>."),
+          answer("Quand on choisit le <b>seuil alpha</b> (par exemple 5%) pour réaliser un test, on choisit en fait le <b>risque d'erreur de type I</b>", correct=TRUE),
+          answer("<b>beta=1-alpha</b>"),
+          answer("Généralement, on cherche à <b>valider H0</b>"),
+          answer("Généralement, on cherche à 'prouver' qu'il <b>existe un effet de X sur Y</b>", correct=TRUE), 
+          incorrect="Malheureusement, recourir à un test statistique ne nous prémunit pas du <b>risque d'erreur</b> et il faut toujours faire des compromis entre les risques d'erreur de type I et de type II",
           correct="Oui! Vous avez apparemment compris les grands principes donc on va pouvoir passer à la pratique :-)",
           allow_retry=TRUE)
 ```
@@ -451,17 +458,19 @@ table(broceliande_chenes$enchantement)
 t.test(perlimpinpin~enchantement, data=broceliande_chenes)
 ```
 
+
 ```{r ttest_questions1}
 question("Le résultat du test ci-dessus permet de ",
-         answer("rejeter l'hypothèse H_0: donc la quantité de perlimpinpin n'est pas liée à l'enchantement des chênes"),
-         answer("accepter l'hypothèse H_0: donc la quantité de perlimpinpin n'est pas liée à l'enchantement des chênes"),
-         answer("rejeter l'hypothèse H_0: donc la quantité de perlimpinpin est liée à l'enchantement des chênes", correct=TRUE),
-         answer("accepter l'hypothèse H_0: donc la quantité de perlimpinpin est liée à l'enchantement des chênes"),
+         answer("<b>rejeter</b> l'hypothèse H_0: donc la quantité de perlimpinpin <b>n'est pas liée</b> à l'enchantement des chênes"),
+         answer("<b>accepter</b> l'hypothèse H_0: donc la quantité de perlimpinpin <b>n'est pas liée</b> à l'enchantement des chênes"),
+         answer("<b>rejeter</b> l'hypothèse H_0: donc la quantité de perlimpinpin <b>est liée</b> à l'enchantement des chênes", correct=TRUE),
+         answer("<b>accepter</b> l'hypothèse H_0: donc la quantité de perlimpinpin <b>est liée</b> à l'enchantement des chênes"),
          incorrect="Non! attention au 'sens' de l'hypothèse H_0...",
          correct="Oui! Il était assez simple d'inférer cet effet ne serait-ce que visuellement -et du fait des effectifs importants de chênes-",
          allow_retry=TRUE
 )
 ```
+
 
 
 ## --- 2.5 Pratique avec infer
@@ -479,15 +488,7 @@ Voici une manière de décomposer la réalisation d'un test:
 
 <table><col width="60%"><col width="40%">
 <tr><td>
-```{r, fig.width=5, fig.height=5}
-# Installer DiagrammeR si necessaire
-if (!requireNamespace("DiagrammeR", quietly = TRUE)) {
-  install.packages("DiagrammeR")
-}
-
-# Charger le package
-library(DiagrammeR)
-
+```{r diagramme_infer_1, fig.width=5, fig.height=5}
 # Creer le diagramme
 grViz('digraph infer_workflow {
   graph [layout = dot, rankdir = TB]
@@ -696,101 +697,6 @@ question("Pour chaque situation ci-dessus, cochez si vous pensez que la distribu
 
 Que faire alors si l'on est dans un cas où manifestement la distribution par groupes n'est pas gaussienne?
 
-<div class="encadre">
-Dans certains cas, on peut considérer que les **effectifs par groupe sont assez élevés pour que la condition de distribution gaussienne ne soit pas strictement nécessaire à la validité du test**. En effet, la distribution de $T$ tend vers une distribution de Student à $\nu$ degrés de liberté asymptotiquement: si les tailles d'échantillon sont "suffisamment grandes" la distribution de la statistique sera proche de cette distribution théorique. Cela découle du **Théorème Central Limite** qui dit que la distribution de la moyenne d'un échantillon tend vers une gaussienne lorsque la taille de l'échantillon est grande.
-</div>
-
-<small>💡Souvent, on considère que s'il y a plus de 30 individus par groupe, alors on peut considérer que la distribution de $T$ est suffisamment proche d'une distribution de Student pour que le test soit valide ✅ ... mais il s'agit d'une règle empirique et non d'une règle mathématique! </small>
-
-Cette idée de "distribution asymptotique" est assez compliquée à comprendre mathématiquement, mais nous pouvons ce genre de phénomène par une **simulation**... 
-
-
-<!-- <table> -->
-<!-- <col width="50%"> -->
-<!-- <col width="50%"> -->
-<!-- <tr><td> -->
-<!-- On procède à plusieurs tirages de X, de taille $N=10$ (donc plutôt **petits**), dans une distribution non-gaussienne (distribution représentée en vert). Pour chacun de ces échantillons, on calcule la moyenne (droite violette). -->
-<!-- </td><td> -->
-<!-- ```{r dist1, echo=FALSE, fig.height=2, fig.width=5, cache=TRUE} -->
-<!-- anim=distribution_of_mean(N=10, mu=2, sigma=1, -->
-<!--                      nIter=10000,nImages=20, -->
-<!--                      show=c(TRUE,TRUE,TRUE,FALSE), -->
-<!--                      model="lnorm", -->
-<!--                      animate=FALSE) -->
-<!-- anim -->
-<!-- ``` -->
-<!-- </td></tr></table> -->
-<!-- <table> -->
-<!-- <col width="50%"> -->
-<!-- <col width="50%"> -->
-<!-- <tr><td> -->
-<!-- On fait cela de très, très nombreuses fois (ici, 10 000 fois), et du coup on peut observer la distribution de moyennes afichée ci-contre... -->
-<!-- </td><td> -->
-<!-- ```{r anim1, echo=FALSE, fig.height=2, fig.width=5, cache=TRUE} -->
-<!-- anim=distribution_of_mean(N=10, mu=2, sigma=1, -->
-<!--                      nIter=10000,nImages=20, -->
-<!--                      show=c(TRUE,TRUE,FALSE,FALSE), -->
-<!--                      model="lnorm", -->
-<!--                      animate=TRUE) -->
-<!-- anim=anim+transition_states(frame,transition_length=1,state_length=1) -->
-<!-- anim_save(animation=anim, filename="www/anim1.gif") -->
-<!-- ``` -->
-<!-- ![](www/anim1.gif) -->
-<!-- </td></tr></table> -->
-
-<!-- <table> -->
-<!-- <col width="50%"> -->
-<!-- <col width="50%"> -->
-<!-- <tr><td> -->
-<!-- Bon, ben, du coup, on ne sait pas très bien quelle loi suit la moyenne: (visiblement, une loi différente de la loi $\mathcal{N}(\mu,\sigma)$):  -->
-<!-- blabal </td><td> -->
-<!-- ```{r anim2, echo=FALSE, fig.height=2, fig.width=5} -->
-<!-- distribution_of_mean(N=30, mu=5, sigma=1, -->
-<!--                      nIter=10000,nImages=20, -->
-<!--                      show=c(TRUE,FALSE,TRUE,TRUE), -->
-<!--                      model="lnorm", -->
-<!--                      animate=FALSE) -->
-<!-- ``` -->
-<!-- </td> -->
-<!-- <td> -->
-
-
-<!-- ```{r anim_lnorm_smallN_2, echo=FALSE, fig.height=2, fig.width=5} -->
-<!-- distribution_of_mean(N=10, mu=2, sigma=1, -->
-<!--                      nIter=10000,nImages=20, -->
-<!--                      show=c(TRUE,FALSE,TRUE,TRUE), -->
-<!--                      model="lnorm", -->
-<!--                      animate=FALSE) -->
-<!-- ``` -->
-<!-- </td></tr></table> -->
-
-
-<!-- Que se passe-t-il pour une taille d'échantillon plus importante? -->
-
-<!-- ```{r anim5_bis, echo=FALSE, fig.height=2, fig.width=5, cache=TRUE} -->
-<!-- anim=distribution_of_mean(N=50, mu=2, sigma=1, -->
-<!--                      nIter=10000,nImages=20, -->
-<!--                      show=c(TRUE,TRUE,FALSE,FALSE), -->
-<!--                      model="lnorm") -->
-<!-- anim=anim+transition_states(frame,transition_length=1,state_length=1) -->
-<!-- anim_save(animation=anim, filename="anim3.gif") -->
-<!-- ``` -->
-<!-- ![](anim3.gif) -->
-<!-- Par la barbe de Merlin! On dirait que plus **$N$ est grand**, et plus la distribution se **rapproche de la loi $\mathcal{N}(\mu,\sigma)$**! -->
-
-<!-- ```{r anim6, echo=FALSE, fig.height=2, fig.width=5} -->
-<!-- distribution_of_mean(N=50, mu=2, sigma=1, -->
-<!--                      nIter=10000,nImages=20, -->
-<!--                      show=c(TRUE,FALSE,TRUE,TRUE), -->
-<!--                      model="lnorm", -->
-<!--                      animate=FALSE) -->
-<!-- ``` -->
-
-<!-- Ce résultat, c'est ce qu'on appelle le **Théorème Central Limite**... Ce théorème stipule que "**pour N suffisamment grand**", la distribution de la moyenne $\bar X$ (moyenne d'une variable $X$ ayant une distribution **quelconque**, une **moyenne $\mu$** et un **écart-type $\sigma$**) est **$\mathcal{N}(\mu,\sigma/\sqrt{N})$**. -->
-
-
-
-
 Que se passe-t-il si ce n'est pas le cas? (... et en l'occurrence, **ce n'est pas le cas**). Voyez plutôt, si l'on réaliste un test de Shapiro-Wilk pour tester la normalité des données (pour chaque groupe), ce test rejette l'hypothèse de distribution normale de perlimpinpin pour les arbres non-enchantés:
 
 ```{r shapiro}
@@ -806,32 +712,97 @@ En fait, comme dans le cas du **Théorème Central Limite**, quand bien même l'
 
 Tout le sel de la situation consiste à estimer la valeur pour laquelle on estime que la taille d'échantillon est "suffisamment grande" (ce seuil étant d'autant plus élevé que la distribution des résidus est éloignée de la distribution normale) pour pouvoir appliquer le t-test quand bien-même l'hypothèse de normalité ne serait pas respecté...
 
-Le package `infer` permet  de travailler assez facilement **non pas sur une distribution théorique de la statistique $T$** (reposant, donc, sur un modèle de distribution supposé) mais sur la **distribution observée de $T$ quand on réalise des permutations**.
 
-Le principe des permutations réalisées ici est de réaliser de nombreuses fois l'opération suivante:
+## --- 3.3 Théorème Central Limite
 
-- étiqueter au hasard les individus selon les **modalités de la variable définissant les groupes** (et selon les effectifs observés)
-- calculer la **statistique $T$** pour ce jeu de données (généré, donc, sous hypothèse que la variable qui définit le groupe et la réponse quantitative soient indépendants)
+<div class="encadre">
+Dans certains cas, on peut considérer que les **effectifs par groupe sont assez élevés pour que la condition de distribution gaussienne ne soit pas strictement nécessaire à la validité du test**. En effet, la distribution de $T$ tend vers une distribution de Student à $\nu$ degrés de liberté asymptotiquement: si les tailles d'échantillon sont "suffisamment grandes" la distribution de la statistique sera proche de cette distribution théorique. Cela découle du **Théorème Central Limite** qui dit que la distribution de la moyenne d'un échantillon tend vers une gaussienne lorsque la taille de l'échantillon est grande.
+</div>
 
-On obtient ainsi la **distribution de la statistique $T$ sous hypothèse d'indépendance** pour les distributions observées.
+<small>💡Souvent, on considère que s'il y a plus de 30 individus par groupe, alors on peut considérer que la distribution de $T$ est suffisamment proche d'une distribution de Student pour que le test soit valide ✅ ... mais il s'agit d'une règle empirique et non d'une règle mathématique! </small>
 
-```{r infer_permutations_ttest, fig.width=5, fig.height=2.5}
-# permutations=broceliande %>%
-#   specify(perlimpinpin ~ enchantement) %>%
-#   hypothesize(null="independence") %>%
-#   generate(reps=1000,type="permute") %>%
-#   calculate(stat="t", order=c(FALSE,TRUE)) %>%
-#   visualize(method="simulation",
-#             obs_stat=t_obs,
-#             direction="two_sided")
+Cette idée de "distribution asymptotique" est assez compliquée à comprendre mathématiquement, mais nous pouvons ce genre de phénomène par une **simulation**... 
 
+
+<table>
+<col width="50%">
+<col width="50%">
+<tr><td>
+On procède à plusieurs tirages de X, de taille $N=10$ (donc plutôt **petits**), dans une distribution non-gaussienne (distribution représentée en vert). Pour chacun de ces échantillons, on calcule la moyenne (droite violette).
+</td><td>
+```{r anim1, echo=FALSE, fig.height=2, fig.width=5}
+distribution_of_mean(N=10, mu=2, sigma=1,
+                     nIter=10000,nImages=20,
+                     show=c(TRUE,TRUE,FALSE,FALSE),
+                     model="lnorm")
 ```
+</td></tr></table>
+<table>
+<col width="50%">
+<col width="50%">
+<tr><td>
+On fait cela de très, très nombreuses fois (ici, 10 000 fois), et du coup on peut observer la distribution de moyennes afichée ci-contre...
+</td><td>
+```{r anim2, echo=FALSE, fig.height=2, fig.width=5}
+distribution_of_mean(N=10, mu=2, sigma=1,
+                     nIter=10000,nImages=20,
+                     show=c(FALSE,FALSE,FALSE,TRUE),
+                     model="lnorm")
+#anim_save(animation=anim, filename="www/anim1.gif")
+```
+</td></tr></table>
 
-Ici on constate que la significativité du résultat ne fait pas de doute!
+<table>
+<col width="50%">
+<col width="50%">
+<tr><td>
+Bon, ben, du coup, on ne sait pas très bien quelle loi suit la moyenne. En tout cas elle ne suit pas tout à fait la loi $\mathcal{N}(\mu,\sigma)$) (représentée en mauve à l'arrière-plan).
+</td><td>
+```{r anim3, echo=FALSE, fig.height=2, fig.width=5}
+distribution_of_mean(N=10, mu=2, sigma=1,
+                     nIter=10000,nImages=20,
+                     show=c(FALSE,FALSE,TRUE,TRUE),
+                     model="lnorm")
+```
+</td></tr>
+<tr><td>
+Que se passe-t-il pour une taille d'échantillon plus importante? Ici pour N=30:
+</td><td>
+```{r anim5, echo=FALSE, fig.height=2, fig.width=5}
+distribution_of_mean(N=30, mu=2, sigma=1,
+                     nIter=10000,nImages=20,
+                     show=c(FALSE, FALSE,TRUE, TRUE),
+                     model="lnorm",
+                     Nbins_moy=60)
+```
+</td></tr>
+<tr><td>
+Ici pour N=60:
+</td><td>
+```{r anim6, echo=FALSE, fig.height=2, fig.width=5}
+distribution_of_mean(N=60, mu=2, sigma=1,
+                     nIter=10000,nImages=20,
+                     show=c(FALSE, FALSE,TRUE,TRUE),
+                     model="lnorm",
+                     Nbins_moy=100)
+```
+</td></tr>
 
-## --- 3.3 infer
+</table>
 
-```{r}
+Par la barbe de Merlin! On dirait que plus **$N$ est grand**, et plus la distribution se **rapproche de la loi $\mathcal{N}(\mu,\sigma)$**!
+
+Ce résultat, c'est ce qu'on appelle le **Théorème Central Limite**... Ce théorème stipule que "**pour N suffisamment grand**", la distribution de la moyenne $\bar X$ (moyenne d'une variable $X$ ayant une distribution **quelconque**, une **moyenne $\mu$** et un **écart-type $\sigma$**) est **$\mathcal{N}(\mu,\sigma/\sqrt{N})$**.
+
+
+## --- Test de Student non paramétrique
+
+Si l'on est face à une situation où les résidus ne sont pas gaussiens et les tailles d'échantillons sont limitées (de sorte qu'il semble difficile d'appliquer les conclusions du Théorème Central Limite), il peut être nécessaire de recourir à ce qu'on appelle des "tests non paramétriques" (qui ne reposent pas sur une hypothèse de distribution particulière).
+
+
+<table><col width="60%"><col width="40%">
+<tr><td>
+```{r, fig.width=5, fig.height=5}
 # Installer DiagrammeR si necessaire
 if (!requireNamespace("DiagrammeR", quietly = TRUE)) {
   install.packages("DiagrammeR")
@@ -879,10 +850,153 @@ grViz('digraph infer_workflow {
 
 
 }')
+```
+</td><td>
 
+Ainsi, pour réaliser un test de Student avec `infer`, on suit les étapes suivantes:
+
+- partant des <span style="background-color: #bae1ff; padding: 2px;">données</span>:
+- spécifier ("specify") le <span style="background-color: #bae1ff; padding: 2px;">modèle</span> (données, variables X et Y) 
+- formuler ("hypothesize") <span style="background-color: #ffffba; padding: 2px;">l'hypothèse nulle</span>
+- générer des permutations des données sous hypothèse nulle ("generate"), calculer la <span style="background-color: #ffffba; padding: 2px;">distribution de la statistique</span>
+- calculer ("calculate") la <span style="background-color: #ffdfba; padding: 2px;">distribution de la statistique sous hypothèse imme</span>
+- calculer ("calculate") la <span style="background-color: #ffdfba; padding: 2px;">statistique observée</span>
+- obtenir la <span style="background-color: #ffb3ba; padding: 2px;">p-value</span> ("get_p_value") et l'interpréter
+
+</td></tr></table>
+
+
+
+Le package `infer` permet  de transformer facilement un certain nombre de tests (et en particulier ici, le test de Student) en leur équivalent non-paramétrique. Pour cela, il va **approximer la distribution théorique des échantillons par leur distribution observée**... C'est à dire que plutôt que se reposer sur des modèles mathématiques théoriques pour la distribution des échantillons et en déduire la distribution de la statistique sous hypothèse nulle, on va considérer que les observations elles-mêmes fournissent la distribution des échantillons et que l'on peut s'en servir pour déduire la distribution de la statistique de Student sous hypothèse nulle. 
+
+Concrètement, il va procéder comme suit, en réalisant de nombreuses fois les opérations suivantes:
+
+- étiqueter au hasard les individus selon les **modalités de la variable définissant les groupes** (et selon les effectifs observés)
+- calculer la **statistique $T$** pour ce jeu de données (généré, donc, sous hypothèse que la variable qui définit le groupe et la réponse quantitative soient indépendants)
+
+On obtient ainsi la **distribution de la statistique $T$ sous hypothèse d'indépendance** pour les distributions observée (ici estimation de la distribution basée sur 1000 permutations).
+
+
+<table><col width="60%"><col width="40%">
+<tr><td>
+🧚🌳🧚🌳🧚 
+
+Examinons la relation entre le nombre de fées habitant dans un arbre et le fait que l'arbre ait été enchanté ou non, à l'aide d'un test de Student non-paramétrique réalisé avec le package infer:
+
+</td><td>
+```{r, fig.width=4, fig.height=3}
+ggplot(broceliande,
+           aes(x = enchantement, y = fees)) +
+  geom_boxplot(width=0.3)+
+  geom_violin(fill="#A03090", alpha=0.5)+
+  labs(title = "fees~enchantement", x = "enchantement", y = "fees") +
+  theme_minimal()
+```
+</td></tr></table>
+
+
+```{r, echo=TRUE}
+mod_et_hyp=broceliande %>% 
+  specify(fees ~ enchantement) %>%
+  hypothesize(null="independence")
+print(head(mod_et_hyp))
+
+t_obs=mod_et_hyp %>%
+  calculate(stat="t", order=c(TRUE,FALSE)) %>%
+  pull(stat)
+print(t_obs)
+
+
+dist_null=mod_et_hyp %>% 
+  generate(reps=1000,type="permute") %>%
+  calculate(stat="t", order=c(TRUE,FALSE))
+print(head(dist_null))
+
+p_value=get_p_value(dist_null,t_obs, direction="greater") %>% 
+  pull()
+print(p_value)
+
+
+dist_null %>% 
+  visualize(method="simulation") +
+  shade_p_value(obs_stat=t_obs,
+            direction="greater")
+  
+```
+
+<table>
+  <col width="40%">
+  <col width="60%">
+  <tr><td>
+
+
+A vous de faire maintenant. Essayez de voir si l'enchantement des **sapins** influe significativement la quantité de poudre de perlimpinpin, en prenant en compte le fait que la distribution de perlimpinpin par groupe ne **semble pas gaussienne**.
+
+L'environnement ci-dessous est préparé de sorte qu'on y a déjà executé les commandes suivantes:
+
+```{r, sapins-setup, echo=TRUE}
+broceliande_sapins=broceliande %>% 
+  filter(espece=="sapin")
+
+mod_et_hyp=broceliande_sapins %>% 
+  specify(perlimpinpin~enchantement) %>%
+  hypothesize(null="independence")
+
+dist_null=mod_et_hyp %>% 
+  generate(reps=1000,type="permute") %>%
+  calculate(stat="t", order=c(TRUE,FALSE))
 ```
 
 
+</td><td>
+```{r, fig.width=4, fig.height=3}
+broceliande_sapins=broceliande %>% 
+  filter(espece=="sapin")
+ggplot(broceliande,
+           aes(x = enchantement, y = perlimpinpin)) +
+  geom_boxplot(width=0.3)+
+  geom_violin(fill="forestgreen", alpha=0.5)+
+  labs(title = "perlimpinpin~enchantement (sapins)", x = "enchantement", y = "perlimpinpin") +
+  theme_minimal()
+```
+</td></tr></table>
+
+
+
+Complétez les commandes suivantes pour finir d'exécuter et interpréter le test:
+
+```{r sapins, exercise=TRUE}
+t_obs=mod_et_hyp %>%
+  _________(stat="t", order=c(TRUE,FALSE)) %>%
+  pull(stat)
+t_obs
+
+p_value=___________(dist_null,t_obs, direction="greater") %>% 
+  pull()
+p_value
+
+
+dist_null %>% 
+  _______(method="simulation") +
+  _______(obs_stat=______,
+          direction="greater")
+```
+
+```{r sapins-solution}
+t_obs=mod_et_hyp %>%
+  calculate(stat="t", order=c(TRUE,FALSE)) %>%
+  pull(stat)
+t_obs
+
+p_value=get_p_value(dist_null,t_obs, direction="greater") %>% 
+  pull()
+p_value
+
+
+dist_null %>% visualize(method="simulation") +
+  shade_p_value(obs_stat=t_obs,
+            direction="greater")
+```
 
 ## 4. Test du Chi-2 
 
@@ -903,51 +1017,107 @@ Dans tous les cas, lorsque l'on réalise un test statistique, il faut être trè
 - Les hypothèses du modèle sous-jacent au test (par exemple, pour le t-test, la variable d'intérêt doit être de distribution gaussienne. En revanche, le fait que vous utilisiez le t-test de Welch et non de Student vous permet de supposer que la variance est différente dans les deux groupes)
 - La nature de l'hypothèse $H_0$ (Si vous vous trompez sur la nature de cette hypothèse, alors vous vous tromperez dans la manière dont vous interprétez les résultats du test!)
 
-
 ## --- 4.1 Principe du test du Chi-2
 
-Intéressons-nous au jeu de données `chateauxEtBoulots`, et au lien entre `genre` et `activite`.
-
-
-
-```{r chateauxEtBoulots_barplot_1, fig.width=6,fig.height=2}
-ggplot(chateauxEtBoulots,aes(x=activite))+
-  geom_bar(aes(fill=genre))
-```
-
-```{r chateauxEtBoulots_barplot_2, fig.width=6,fig.height=2}
-ggplot(chateauxEtBoulots,aes(x=activite))+
-  geom_bar(aes(fill=genre),position="fill")
-```
-
-
-## --- 4.2 Tableau de contingence
-
-Nous avons-vu que la comparaison entre le tableau des effectifs croisés **observés** et des effectifs **attendus** sous hypothèse d'indépendance pouvait nous renseigner sur un lien éventuel entre les deux variables considérées.
-
-En l'occurrence, on peut noter les **effectifs observés** dans chacune des J cases du tableau $\bar {N_i}$ et les **effectifs attendus** $N_i$.
-
-A partir de ces deux tableaux, une **statistique du Chi-2** (écrite $\chi^2$) peut être calculée et utilisée pour tester l'hypothèse d'indépendance entre les deux variables catégorielles. La statistique du $\chi^2$ correspond à :
-
-$$\chi^2=\sum_{i=1}^{J}\frac{(\bar{N_i}-N_i)^2}{N_i}$$
-**Sous hypothèse d'indépendance**, et sous réserve que les effectifs par case soient suffisamment importants, cette statistique $\chi^2$ est censée suivre une **distribution du $\chi^2$ à $J-2$ degrés de liberté**.
-
-C'est ce résultat (mathématique) qui permet de fournir une **p-value** qui correspond à la **probabilité d'obtenir une valeur de $\chi^2$ supérieure à celle qui est calculée sur les observations**.
-
-## --- 4.3 Pratique
-
-Faire un test du Chi-2 sous R
 
 <table>
   <col width="40%">
   <col width="60%">
   <tr>
-  <td><img src="www/trone.png" width="200px" </td>
-  <td>Examinons par exemple le jeu de données `chateauxEtBoulots` et plus particulièrement le lien entre le genre et l'activité de nos personnages de contes de fée... On sait grâce aux **tableaux de contingence** comment **décrire le lien** entre ces deux variables catégorielles par un **tableau de contingences**. Voyons maintenant comment l'on peut **tester la significativité de ce lien**.</td>
+  <td><img src="www/trone.png" width="200px"> </td>
+  <td>Examinons par exemple le jeu de données `chateauxEtBoulots` et plus particulièrement le lien entre le genre et l'activité de nos personnages de contes de fée... On sait comment **décrire le lien** entre ces deux variables catégorielles par un **tableau de contingences**. Voyons maintenant comment l'on peut **tester la significativité de ce lien**.</td>
   </tr>
 </table>
 
-```{r chateauxEtBoulots_chisq_en_pratique}
+
+On peut représenter les effectifs de chaque groupe d'activité en fonction du genre comme ci-dessous
+
+```{r chateauxEtBoulots_barplot_1, fig.width=6,fig.height=2, echo=TRUE}
+ggplot(chateauxEtBoulots,aes(x=activite))+
+  geom_bar(aes(fill=genre))
+```
+
+
+Une table permet aussi d'évaluer le lien entre ces deux variables:
+
+```{r table_genre_activite, echo=TRUE, eval=FALSE}
+chateauxEtBoulots %>% 
+  group_by(activite,genre) %>% 
+  tally() %>% 
+  ungroup()
+```
+
+```{r}
+chateauxEtBoulots %>% 
+  group_by(activite,genre) %>% 
+  tally() %>% 
+  ungroup() %>% 
+  knitr::kable()
+```
+Souvent, dans ce genre de problématique, on choisit de montrer un tableau croisé (**tableau de contingence**) de ce type:
+
+```{r,echo=TRUE, eval=FALSE}
+table(chateauxEtBoulots$activite, chateauxEtBoulots$genre)
+```
+
+```{r}
+table(chateauxEtBoulots$activite, chateauxEtBoulots$genre) %>% 
+knitr::kable()
+```
+
+
+Considérons la distribution de chacune des variables (il y a 72 observations en tout):
+
+```{r,echo=TRUE, eval=FALSE}
+chateauxEtBoulots %>% 
+  group_by(genre) %>% 
+  tally() %>% 
+  mutate(prop=n/sum(n))
+```
+
+```{r}
+chateauxEtBoulots %>% 
+  group_by(genre) %>% 
+  tally() %>% 
+  mutate(prop=n/sum(n)) %>% 
+  knitr::kable()
+```
+
+```{r, echo=TRUE, eval=FALSE}
+chateauxEtBoulots %>% 
+  group_by(activite) %>% 
+  tally() %>% 
+  mutate(prop=n/sum(n))
+```
+
+```{r}
+chateauxEtBoulots %>% 
+  group_by(activite) %>% 
+  tally() %>% 
+  mutate(prop=n/sum(n)) %>% 
+  knitr::kable()
+```
+
+Si **il n'y avait aucun lien entre le genre et l'activité (hypothèse $H_0$)** alors la proportion homme-femme dans chacune des activités devrait être la même (ici 50-50). On devrait donc avoir 9 chevalier homme et 9 chevalier femme, 9 enchanteurs et 9 enchanteuses, 11 sorciers et 11 sorcières, et 8 rois ou princes et 8 reines ou princesses. On est capable de **déduire les effectifs attendus pour chacun des croisements sous hypothèse nulle**...
+
+## --- 4.2 Statistique du Chi2
+
+Reprenons les explications ci-dessus de manière un peu plus formelle...
+
+On peut noter les **effectifs observés** dans chacune des J cases du tableau $\bar {N_i}$ et les **effectifs attendus** $N_i$.
+
+A partir de ces deux tableaux, une **statistique du Chi-2** (écrite $\chi^2$) peut être calculée et utilisée pour tester l'hypothèse d'indépendance entre les deux variables catégorielles. La statistique du $\chi^2$ correspond à :
+
+$$\chi^2=\sum_{i=1}^{J}\frac{(\bar{N_i}-N_i)^2}{N_i}$$
+**Sous hypothèse d'indépendance**, et sous réserve que les **effectifs attendus par case soient suffisamment importants** (classiquement, n>5), cette statistique $\chi^2$ est censée suivre une **distribution du $\chi^2$ à $J-2$ degrés de liberté**.
+
+C'est ce résultat (mathématique) qui permet de fournir une **p-value** qui correspond à la **probabilité d'obtenir une valeur de $\chi^2$ supérieure à celle qui est calculée sur les observations**.
+
+## --- 4.3 Pratique
+
+En pratique, voilà comment l'on peut réaliser un test du Chi-2 sous R:
+
+```{r chateauxEtBoulots_chisq_en_pratique, echo=TRUE}
 montest=chisq.test(table(chateauxEtBoulots$genre,chateauxEtBoulots$activite))
 print(montest)
 ```
@@ -956,7 +1126,7 @@ Ici la p-value est très petite, montrant (comme on s'y attendait) que les deux 
 
 On peut examiner plus avant les éléments renvoyés par ce test de la manière suivante:
 
-```{r chisqtest_elems}
+```{r chisqtest_elems, echo=TRUE}
 names(montest)
 ```
 
@@ -965,50 +1135,62 @@ On retrouve ainsi, entre autres choses, des éléments d'information concernant
 - les **effectifs observés**
 
 
-```{r chisqtest_observed}
+```{r chisqtest_observed, echo=TRUE}
 montest$observed
 ```
 
 - les **effectifs attendus sous hypothèse d'indépendance**
 
-```{r chisqtest_expected}
+```{r chisqtest_expected, echo=TRUE}
 montest$expected
 ```
 
 
-<div class="exo">
+## --- 4.4 Petits effectifs
 
-Considérez le tableau `chateauxEtBoulots` et les variables `tenue` et `region`. Les tendances en terme de couleurs de tenue sont-elles bien significativement différentes en fonction de la région de Fantaisie?...
+Un test du $\chi^2$ est construit en supposant que **les effectifs $\bar N_j$ sont "suffisants")**. Ainsi, quand certaines cases du tableau de contingence comprennent trop peu d'individus, appliquer un test du $\chi^2$ peut causer un "warning" stipulant que *l'approximation du $\chi^2$ est peut être incorrecte*.
 
-```{r, echo=FALSE, results=FALSE}
-chisq.test(table(chateauxEtBoulots$tenue,chateauxEtBoulots$region))
+
+Considérez le lien entre l'activité et la couleur de tenue dans le tableau `chateauxEtBoulots`
+
+```{r, echo=TRUE}
+ggplot(chateauxEtBoulots, aes(x=activite,fill=tenue))+
+  geom_bar()+
+  scale_fill_manual(values=c("bleue"="#88aed0", "rose"="#d088ae","noire"="#000000",
+                             "verte"="#aed088","grise"="#aaaaaa"))
 ```
 
-</div>
+Réalisez un **test du Chi-2 pour tester le lien**:
 
 
-## 5 Validité du test du Chi-2 
-
-## ----- 5.1 Petits effectifs
-
-Un test du $\chi^2$ est construit en supposant que **les effectifs $\bar N_j$ sont "suffisants")**. Ainsi, quand certaines cases du tableau de contingence comprennent trop peu d'individus, appliquer un test du $\chi^2$ peut causer un "warning" stipulant que *l'approximation du $\chi^2$ peut être incorrecte*.
-
-Conidérons par exemple un sous-jeu de données de `chateauxEtBoulots` rassemblant uniquement les individus de noble extraction, et intéressons-nous au lien entre leur genre et leur couleur de tenue:
-
-```{r chateauxEtBoulots_princiere}
-tenue_princiere=filter(chateauxEtBoulots, activite=="royaute") %>%
-  mutate(tenue=as.factor(as.vector(tenue)))
-
-table_tenue_princiere=table(tenue_princiere$genre, tenue_princiere$tenue)
-table_tenue_princiere
-
-
-chisq.test(table_tenue_princiere)
+```{r mages,exercise=TRUE}
+contingence=_______(chateauxEtBoulots$___,chateauxEtBoulots$___)
+test=_______(_______)
+test
 ```
 
-Ici, on a bien des effectifs réduits qui causent le renvoi d'un warning...
 
-Le package `infer` permet, dans ce genre de situation, de **calculer une p-value en passant par des permutations** plutôt qu'en utilisant la distribution de la statistique du $\chi^2$ qui s'applique pour des effectifs observés importants.
+```{r mages-solution}
+contingence=table(chateauxEtBoulots$tenue,chateauxEtBoulots$activite)
+test=chisq.test(contingence)
+test
+```
+
+
+```{r question_genre_magie}
+question("Cochez les propositions correctes",
+         answer("Le résultat de ce test <b>est</b> valide."),
+         answer("Le résultat de ce test n'est <b>peut-être</b> pas valide.", correct=TRUE),
+         answer("Le résultat de ce test n'est <b>assurément</b> pas valide."),
+         answer("D'après le test, il n'y a <b>pas de lien</b> entre tenue et activité."),
+         answer("D'après le test, les couleurs de tenues sont <b>significativement</b> liées au type d'activité", correct=TRUE),
+         correct="Oui! Le résultat du test est peut-être invalide du fait de l'effectif attendu faible dans certaines combinaisons mais s'il est valide alors il va dans le sens d'un lien significatif.")
+```
+
+
+## --- 4.5 Test du Chi-2 non-paramétrique
+
+Le package `infer` permet, dans ce genre de situation (effectifs attendus insuffisants), de **calculer une p-value en passant par des permutations** plutôt qu'en utilisant la distribution théorique de la statistique du $\chi^2$ qui s'applique pour des effectifs observés importants.
 
 Le principe des permutations réalisées ici est de réaliser de nombreuses fois l'opération suivante:
 
@@ -1018,89 +1200,10 @@ Le principe des permutations réalisées ici est de réaliser de nombreuses fois
 
 On obtient ainsi la **distribution de la statistique $chi^2$ sous hypothèse d'indépendance** pour les effectifs observés de l'un et l'autre facteur (aussi déséquilibrés et faibles soient-ils).
 
-La valeur observée du $\chi^2$ sur les données est la suivante:
 
-```{r infer_obs_chisq, warning=FALSE, message=FALSE}
-obs_chisq=tenue_princiere %>%
-  chisq_test(formula=tenue~genre) %>%
-  select(statistic) %>%
-  pull()
-
-obs_chisq # pareil que chisq.test(tenue_princiere)$statistic, mais obtenu via infer
-
-```
-
-On simule 1000 jeux de données différents à partir du jeu de données `sim_princiere` selon la méthode expliquée ci-dessus. On obtient ainsi 1000 valeurs de la statistique $\chi^2$:
-
-```{r infer_generate_chisq}
-sim_princiere=tenue_princiere %>%
-  specify(tenue~genre) %>%
-  hypothesize(null="independence") %>%
-  generate(reps=1000, type="permute") %>%
-  calculate(stat="Chisq")
-
-head(sim_princiere)
-```
-
-Cela permet de décrire la distribution de la statistique $\chi^2$ et d'en déduire une p-value:
-
-```{r sim_princiere_visu, fig.width=5, fig.height=2.5}
-# resume_sim_princiere=
-#   sim_princiere %>%
-#   mutate(case=stat<obs_chisq) %>%
-#   group_by(case) %>%
-#   summarise(prop=n()) %>%
-#   mutate(prop=prop/1000)
-# resume_sim_princiere
-# 
-# sim_princiere%>%
-#   visualize(obs_stat=obs_chisq, direction="greater")
-```
-
-On obtient ainsi la distribution réelle de la statistique du $\chi^2$ sous hypothèse d'indépendance, et la valeur de la p-value . Ici, on remarque que la p-value est quasiment inchangée selon la méthode de calcul (distribution théorique ou par permutations)! On n'est pas en mesure d'affirmer que la couleur de tenue des princes et princesses dépend de leur genre.
-
-
-<div class="exo">
-
-On reprend l'exercice précédent...
-
-Considérez le tableau `chateauxEtBoulots` et les variables `tenue` et `region`. Les tendances en terme de couleurs de tenue sont-elles bien significativement différentes en fonction de la région de Fantaisie?...
-
-Répondez à cette question à l'aide du package `infer` et des permutations, de sorte de ne pas être gêné par le faible effectif dans certaines cases du tableau de contingence...
-
-```{r, echo=FALSE, results=FALSE}
-# obs_chisq=tenue_princiere %>%
-#   chisq_test(formula=tenue~region) %>%
-#   select(statistic) %>%
-#   pull()
-# 
-# obs_chisq # pareil que chisq.test(tenue_princiere)$statistic, mais obtenu via infer
-# sim_princiere=tenue_princiere %>%
-#   specify(tenue~genre) %>%
-#   hypothesize(null="independence") %>%
-#   generate(reps=1000, type="permute") %>%
-#   calculate(stat="Chisq")
-# 
-# head(sim_princiere)
-# resume_sim_princiere=
-#   sim_princiere %>%
-#   mutate(case=stat<obs_chisq) %>%
-#   group_by(case) %>%
-#   summarise(prop=n()) %>%
-#   mutate(prop=prop/1000)
-# resume_sim_princiere
-# 
-# sim_princiere%>%
-#   visualize(obs_stat=obs_chisq, direction="greater")
-```
-
-</div>
-
-
-
-## ANNEXE
-
-```{r}
+<table><col width="60%"><col width="40%">
+<tr><td>
+```{r, fig.width=5, fig.height=5}
 # Installer DiagrammeR si necessaire
 if (!requireNamespace("DiagrammeR", quietly = TRUE)) {
   install.packages("DiagrammeR")
@@ -1115,49 +1218,171 @@ grViz('digraph infer_workflow {
 
   # Definir les nœuds
   node [shape = rectangle, style = filled, color = lightblue]
-
-  C [color="orange", label = "Hypothèse nulle\nH0"]
-  D [color="orange", label = "Données permutées"]
-  G [label = "Graphique \nde la distribution sous H0\nde la statistique observée"]
-  H [label = "p-value"]
-  I [color = seagreen,label = "Interprétation :\nRejeter ou non H0"]
-
-
-  subgraph cluster_AB {
-    label = "";
-    style = solid;
-    color = gray;
-    node [shape = rectangle, style = filled, color = pink];
-    A [label = "Données\n(tableau initial)"]
-    B [label = "Données + Modèle Y~X"]
-  }
+  A [color="#bae1ff",label = "Données\n(tableau initial)"]
+  B [color="#bae1ff", label = "Données + Modèle Y~X"]
+  C [color="#ffffb9", label = "Hypothèse nulle\nH0"]
+  D [color="#ffffb9", label = "Données permutées"]
+  H [color="#ffb3ba",label = "p-value"]
+  I [style=solid,color=black,label = "Rejet ou non de H0"]
+  
   
   subgraph cluster_EF {
     label = "";
-    style = solid;
+    style = filled;
     color = gray;
     node [shape = rectangle, style = filled, color = yellow];
- E [color="yellow", label = "Distribution de la statistique\nsous hypothèse nulle"]
-  F [color="yellow", label = "Statistique observée"]
+  E [color="#ffdfba", label = "Distribution de la statistique\nsous hypothèse nulle"]
+  F [color="#ffdfba", label = "Statistique observée"]
  
   }
 
   # Ajouter les connexions principales
-  A -> B  [label = "<b>specify()</b> : Spécifier le modèle"]
-  B -> C  [label = "hypothesize(): Formuler l hypothèse nulle"]
-  C -> D  [style = dashed, label = "generate() : Générer les données sous H0 (permutation/bootstrap)"]
-  D -> E  [style = dashed, label="Calculer la distribution de la statistique sous H0"]
+  A -> B  [label = "specify()"]
+
+  B -> C  [label = "hypothesize()"]
+  C -> D  [style = dashed, label = "generate()"]
+  D -> E  [style = dashed, label="calculate()"]
  
-  B -> E  [label = "assume(): calculer la distribution de la statistique sous H0,\nen supposant les conditions de validité remplies"]
-  E -> H  [label = "calculate(): calculer la statistique observée"]
-  F -> H
+  
   B -> F  [label = "calculate()"]
-  E -> G  [label = "calculate()\nCalculer la statistique"]
-  G -> H [label = "visualize()\nVisualiser la distribution de la statistique sous hypothèse nulle."]
-  H -> I  [label = "get_p_value()\nEstimer la p-value"]
+  F -> H
+  E -> H  [label = "get_p_value()"]
+  H -> I  [label = "Interpréter la p-value"]
 
 
 }')
+```
+</td><td>
 
+Ainsi, pour réaliser un test de Student avec `infer`, on suit les étapes suivantes:
+
+- partant des <span style="background-color: #bae1ff; padding: 2px;">données</span>:
+- spécifier ("specify") le <span style="background-color: #bae1ff; padding: 2px;">modèle</span> (données, variables X et Y) 
+- formuler ("hypothesize") <span style="background-color: #ffffba; padding: 2px;">l'hypothèse nulle</span>
+- générer des permutations des données sous hypothèse nulle ("generate"), calculer la <span style="background-color: #ffffba; padding: 2px;">distribution de la statistique</span>
+- calculer ("calculate") la <span style="background-color: #ffdfba; padding: 2px;">distribution de la statistique sous hypothèse imme</span>
+- calculer ("calculate") la <span style="background-color: #ffdfba; padding: 2px;">statistique observée</span>
+- obtenir la <span style="background-color: #ffb3ba; padding: 2px;">p-value</span> ("get_p_value") et l'interpréter
+
+</td></tr></table>
+
+
+```{r mychi2test_infer, echo=TRUE}
+mod_et_hyp=chateauxEtBoulots %>%
+  specify(tenue~activite) %>%
+  hypothesize(null="independence")
+
+dist_null=mod_et_hyp %>%
+  generate(reps=1000, type="permute") %>% 
+  calculate(stat="Chisq")
+
+chi2_obs=mod_et_hyp %>%
+  calculate(stat="Chisq") %>%
+  pull(stat)
+chi2_obs
+
+p_value=get_p_value(dist_null,chi2_obs, direction="greater") %>% 
+  pull()
+p_value
+
+
+dist_null %>% visualize(method="simulation") +
+  shade_p_value(obs_stat=chi2_obs,
+            direction="greater")
+```
+
+
+On obtient ainsi la distribution réelle de la statistique du $\chi^2$ sous hypothèse d'indépendance, et la valeur de la p-value . Ici, on remarque que la p-value est quasiment inchangée selon la méthode de calcul (distribution théorique ou par permutations)! 
+
+On est bien en mesure d'affirmer que la **couleur de tenue des personnages dépend de leur activité**.
+
+
+On reprend l'exercice précédent...
+
+Considérez le tableau `chateauxEtBoulots` et les variables `tenue` et `region`. Les tendances en terme de couleurs de tenue sont-elles bien significativement différentes en fonction de la région de Fantaisie?...
+
+
+```{r, fig.width=4, fig.height=3}
+ggplot(chateauxEtBoulots, aes(x=region,fill=tenue))+
+  geom_bar()+
+  scale_fill_manual(values=c("bleue"="#88aed0", "rose"="#d088ae","noire"="#000000",
+                             "verte"="#aed088","grise"="#aaaaaa"))
+```
+
+
+Répondez à cette question à l'aide du package `infer` et des permutations, de sorte de ne pas être gêné par le faible effectif dans certaines cases du tableau de contingence...
+
+
+Dans votre environnement j'ai déjà fait tourner les lignes de commande suivantes:
+
+```{r, echo=TRUE, eval=FALSE}
+mod_et_hyp=chateauxEtBoulots %>%
+  specify(tenue~region) %>%
+  hypothesize(null="independence")
+
+dist_null=mod_et_hyp %>%
+  generate(reps=1000, type="permute") %>% 
+  calculate(stat="Chisq")
+```
+
+
+```{r chi2_region_tenue, exercise=TRUE}
+chi2_obs=mod_et_hyp %>%
+  calculate(stat=_____) %>%
+  pull(stat)
+chi2_obs
+
+p_value=get_p_value(dist_null,chi2_obs, direction="greater") %>% 
+  pull()
+p_value
+
+
+dist_null %>% 
+  visualize(method="simulation") +
+  shade_p_value(obs_stat=___,
+                direction="greater")
+```
+
+
+
+```{r chi2_region_tenue-setup}
+mod_et_hyp=chateauxEtBoulots %>%
+  specify(tenue~region) %>%
+  hypothesize(null="independence")
+
+dist_null=mod_et_hyp %>%
+  generate(reps=1000, type="permute") %>% 
+  calculate(stat="Chisq")
+```
+
+
+
+
+```{r, chi2_region_tenue-solution}
+chi2_obs=mod_et_hyp %>%
+  calculate(stat="Chisq") %>%
+  pull(stat)
+chi2_obs
+
+p_value=get_p_value(dist_null,chi2_obs, direction="greater") %>% 
+  pull()
+p_value
+
+
+dist_null %>% 
+  visualize(method="simulation") +
+  shade_p_value(obs_stat=chi2_obs,
+            direction="greater")
+```
+
+
+```{r question_region_tenue}
+question("Cochez les propositions correctes",
+         answer("Le résultat de ce test <b>est</b> valide.", correct=TRUE),
+         answer("Le résultat de ce test n'est <b>peut-être</b> pas valide."),
+         answer("Le résultat de ce test n'est <b>assurément</b> pas valide."),
+         answer("Le test ne parvient pas à rejeter l'hypothèse d'indépendance de tenue et région.", correct=TRUE),
+         answer("D'après le test, les couleurs de tenues sont <b>significativement</b> liées à la région."),
+         correct="Oui! Le résultat du test est valide car on l'a réalisé avec des permutations plutôt qu'en s'appuyant sur une hypothèse paramétrique qui demandait des effectifs attendus supérieurs. Mais il ne parvient pas à rejeter l'hypothèse nulle.")
 ```
 

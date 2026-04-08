@@ -15,6 +15,7 @@ RUN Rscript -e 'install.packages("purrr")'
 RUN Rscript -e 'install.packages("gridExtra")'
 RUN Rscript -e 'install.packages("gganimate")'
 RUN Rscript -e 'install.packages("infer")'
+RUN Rscript -e 'install.packages("DiagrammeR")'
 
 
 # On copie l'arborescence de fichiers dans un dossier app à la racine de l'image. Ce sera le working directory des containers lancés avec notre image
