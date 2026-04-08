@@ -768,7 +768,7 @@ distribution_of_mean(N=10, mu=2, sigma=1,
 <tr><td>
 Que se passe-t-il pour une taille d'échantillon plus importante? Ici pour N=30:
 </td><td>
-```{r anim5, echo=FALSE, fig.height=2, fig.width=5}
+```{r anim4, echo=FALSE, fig.height=2, fig.width=5}
 distribution_of_mean(N=30, mu=2, sigma=1,
                      nIter=10000,nImages=20,
                      show=c(FALSE, FALSE,TRUE, TRUE),
@@ -779,7 +779,7 @@ distribution_of_mean(N=30, mu=2, sigma=1,
 <tr><td>
 Ici pour N=60:
 </td><td>
-```{r anim6, echo=FALSE, fig.height=2, fig.width=5}
+```{r anim5, echo=FALSE, fig.height=2, fig.width=5}
 distribution_of_mean(N=60, mu=2, sigma=1,
                      nIter=10000,nImages=20,
                      show=c(FALSE, FALSE,TRUE,TRUE),
