@@ -891,7 +891,7 @@ ggplot(broceliande,
   geom_violin(fill="#A03090", alpha=0.5)+
   labs(title = "fees~enchantement",
        x = "enchantement", y = "fees") +
-  scale_y_sqrt()
+  scale_y_sqrt()+
   theme_minimal()
 ```
 </td></tr></table>
