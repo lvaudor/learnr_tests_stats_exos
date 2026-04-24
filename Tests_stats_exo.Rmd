@@ -859,7 +859,7 @@ Ainsi, pour réaliser un test de Student avec `infer`, on suit les étapes suiva
 - spécifier ("specify") le <span style="background-color: #bae1ff; padding: 2px;">modèle</span> (données, variables X et Y) 
 - formuler ("hypothesize") <span style="background-color: #ffffba; padding: 2px;">l'hypothèse nulle</span>
 - générer des permutations des données sous hypothèse nulle ("generate"), calculer la <span style="background-color: #ffffba; padding: 2px;">distribution de la statistique</span>
-- calculer ("calculate") la <span style="background-color: #ffdfba; padding: 2px;">distribution de la statistique sous hypothèse imme</span>
+- calculer ("calculate") la <span style="background-color: #ffdfba; padding: 2px;">distribution de la statistique sous hypothèse nulle</span>
 - calculer ("calculate") la <span style="background-color: #ffdfba; padding: 2px;">statistique observée</span>
 - obtenir la <span style="background-color: #ffb3ba; padding: 2px;">p-value</span> ("get_p_value") et l'interpréter
 
@@ -889,7 +889,9 @@ ggplot(broceliande,
            aes(x = enchantement, y = fees)) +
   geom_boxplot(width=0.3)+
   geom_violin(fill="#A03090", alpha=0.5)+
-  labs(title = "fees~enchantement", x = "enchantement", y = "fees") +
+  labs(title = "fees~enchantement",
+       x = "enchantement", y = "fees") +
+  scale_y_sqrt()
   theme_minimal()
 ```
 </td></tr></table>
@@ -1153,7 +1155,7 @@ Un test du $\chi^2$ est construit en supposant que **les effectifs $\bar N_j$ so
 
 Considérez le lien entre l'activité et la couleur de tenue dans le tableau `chateauxEtBoulots`
 
-```{r, echo=TRUE}
+```{r, fig.width=6, echo=TRUE}
 ggplot(chateauxEtBoulots, aes(x=activite,fill=tenue))+
   geom_bar()+
   scale_fill_manual(values=c("bleue"="#88aed0", "rose"="#d088ae","noire"="#000000",
@@ -1260,7 +1262,7 @@ Ainsi, pour réaliser un test de Student avec `infer`, on suit les étapes suiva
 - spécifier ("specify") le <span style="background-color: #bae1ff; padding: 2px;">modèle</span> (données, variables X et Y) 
 - formuler ("hypothesize") <span style="background-color: #ffffba; padding: 2px;">l'hypothèse nulle</span>
 - générer des permutations des données sous hypothèse nulle ("generate"), calculer la <span style="background-color: #ffffba; padding: 2px;">distribution de la statistique</span>
-- calculer ("calculate") la <span style="background-color: #ffdfba; padding: 2px;">distribution de la statistique sous hypothèse imme</span>
+- calculer ("calculate") la <span style="background-color: #ffdfba; padding: 2px;">distribution de la statistique sous hypothèse nulle</span>
 - calculer ("calculate") la <span style="background-color: #ffdfba; padding: 2px;">statistique observée</span>
 - obtenir la <span style="background-color: #ffb3ba; padding: 2px;">p-value</span> ("get_p_value") et l'interpréter
 

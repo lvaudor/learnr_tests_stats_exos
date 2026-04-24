@@ -665,8 +665,8 @@ une syntaxe qui décompose les étapes du calcul/raisonnement)
 <col width="40%">
 <tr>
 <td>
-<div class="grViz html-widget html-fill-item" id="htmlwidget-9258762f2bc5c134ec96" style="width:480px;height:480px;"></div>
-<script type="application/json" data-for="htmlwidget-9258762f2bc5c134ec96">{"x":{"diagram":"digraph infer_workflow {\n  graph [layout = dot, rankdir = TB]\n\n  # Definir les nœuds\n  node [shape = rectangle, style = filled, color = lightblue]\n  A [color=\"#bae1ff\",label = \"Données\n(tableau initial)\"]\n  B [color=\"#bae1ff\", label = \"Données + Modèle Y~X\"]\n  H [color=\"#ffb3ba\",label = \"p-value\"]\n  I [style=solid,color=black,label = \"Rejet ou non de H0\"]\n  \n  \n  subgraph cluster_EF {\n    label = \"\";\n    style = filled;\n    color = gray;\n    node [shape = rectangle, style = filled, color = yellow];\n  E [color=\"#ffdfba\", label = \"Distribution de la statistique\nsous hypothèse nulle\"]\n  F [color=\"#ffdfba\", label = \"Statistique observée\"]\n \n  }\n\n  # Ajouter les connexions principales\n  A -> B  [label = \"specify()\"]\n\n  B -> E  [label = \"assume()\"]\n  B -> F  [label = \"calculate()\"]\n  F -> H\n  E -> H  [label = \"get_p_value()\"]\n  H -> I  [label = \"Interpréter la p-value\"]\n\n\n}","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
+<div class="grViz html-widget html-fill-item" id="htmlwidget-accaf66e6868d98581d8" style="width:480px;height:480px;"></div>
+<script type="application/json" data-for="htmlwidget-accaf66e6868d98581d8">{"x":{"diagram":"digraph infer_workflow {\n  graph [layout = dot, rankdir = TB]\n\n  # Definir les nœuds\n  node [shape = rectangle, style = filled, color = lightblue]\n  A [color=\"#bae1ff\",label = \"Données\n(tableau initial)\"]\n  B [color=\"#bae1ff\", label = \"Données + Modèle Y~X\"]\n  H [color=\"#ffb3ba\",label = \"p-value\"]\n  I [style=solid,color=black,label = \"Rejet ou non de H0\"]\n  \n  \n  subgraph cluster_EF {\n    label = \"\";\n    style = filled;\n    color = gray;\n    node [shape = rectangle, style = filled, color = yellow];\n  E [color=\"#ffdfba\", label = \"Distribution de la statistique\nsous hypothèse nulle\"]\n  F [color=\"#ffdfba\", label = \"Statistique observée\"]\n \n  }\n\n  # Ajouter les connexions principales\n  A -> B  [label = \"specify()\"]\n\n  B -> E  [label = \"assume()\"]\n  B -> F  [label = \"calculate()\"]\n  F -> H\n  E -> H  [label = \"get_p_value()\"]\n  H -> I  [label = \"Interpréter la p-value\"]\n\n\n}","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
 </td>
 <td>
 <p>Ainsi, pour réaliser un test de Student avec <code>infer</code>, on
@@ -878,7 +878,7 @@ Que se passe-t-il pour une taille d’échantillon plus importante? Ici
 pour N=30:
 </td>
 <td>
-<img src="Tests_stats_exo_files/figure-html/anim5-1.png" width="480" />
+<img src="Tests_stats_exo_files/figure-html/anim4-1.png" width="480" />
 </td>
 </tr>
 <tr>
@@ -886,7 +886,7 @@ pour N=30:
 Ici pour N=60:
 </td>
 <td>
-<img src="Tests_stats_exo_files/figure-html/anim6-1.png" width="480" />
+<img src="Tests_stats_exo_files/figure-html/anim5-1.png" width="480" />
 </td>
 </tr>
 </table>
@@ -918,8 +918,8 @@ particulière).</p>
 <col width="40%">
 <tr>
 <td>
-<div class="grViz html-widget html-fill-item" id="htmlwidget-c7f0753b5598107f8321" style="width:480px;height:480px;"></div>
-<script type="application/json" data-for="htmlwidget-c7f0753b5598107f8321">{"x":{"diagram":"digraph infer_workflow {\n  graph [layout = dot, rankdir = TB]\n\n  # Definir les nœuds\n  node [shape = rectangle, style = filled, color = lightblue]\n  A [color=\"#bae1ff\",label = \"Données\n(tableau initial)\"]\n  B [color=\"#bae1ff\", label = \"Données + Modèle Y~X\"]\n  C [color=\"#ffffb9\", label = \"Hypothèse nulle\nH0\"]\n  D [color=\"#ffffb9\", label = \"Données permutées\"]\n  H [color=\"#ffb3ba\",label = \"p-value\"]\n  I [style=solid,color=black,label = \"Rejet ou non de H0\"]\n  \n  \n  subgraph cluster_EF {\n    label = \"\";\n    style = filled;\n    color = gray;\n    node [shape = rectangle, style = filled, color = yellow];\n  E [color=\"#ffdfba\", label = \"Distribution de la statistique\nsous hypothèse nulle\"]\n  F [color=\"#ffdfba\", label = \"Statistique observée\"]\n \n  }\n\n  # Ajouter les connexions principales\n  A -> B  [label = \"specify()\"]\n\n  B -> C  [label = \"hypothesize()\"]\n  C -> D  [style = dashed, label = \"generate()\"]\n  D -> E  [style = dashed, label=\"calculate()\"]\n \n  \n  B -> F  [label = \"calculate()\"]\n  F -> H\n  E -> H  [label = \"get_p_value()\"]\n  H -> I  [label = \"Interpréter la p-value\"]\n\n\n}","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
+<div class="grViz html-widget html-fill-item" id="htmlwidget-f58205bf5f7181da896c" style="width:480px;height:480px;"></div>
+<script type="application/json" data-for="htmlwidget-f58205bf5f7181da896c">{"x":{"diagram":"digraph infer_workflow {\n  graph [layout = dot, rankdir = TB]\n\n  # Definir les nœuds\n  node [shape = rectangle, style = filled, color = lightblue]\n  A [color=\"#bae1ff\",label = \"Données\n(tableau initial)\"]\n  B [color=\"#bae1ff\", label = \"Données + Modèle Y~X\"]\n  C [color=\"#ffffb9\", label = \"Hypothèse nulle\nH0\"]\n  D [color=\"#ffffb9\", label = \"Données permutées\"]\n  H [color=\"#ffb3ba\",label = \"p-value\"]\n  I [style=solid,color=black,label = \"Rejet ou non de H0\"]\n  \n  \n  subgraph cluster_EF {\n    label = \"\";\n    style = filled;\n    color = gray;\n    node [shape = rectangle, style = filled, color = yellow];\n  E [color=\"#ffdfba\", label = \"Distribution de la statistique\nsous hypothèse nulle\"]\n  F [color=\"#ffdfba\", label = \"Statistique observée\"]\n \n  }\n\n  # Ajouter les connexions principales\n  A -> B  [label = \"specify()\"]\n\n  B -> C  [label = \"hypothesize()\"]\n  C -> D  [style = dashed, label = \"generate()\"]\n  D -> E  [style = dashed, label=\"calculate()\"]\n \n  \n  B -> F  [label = \"calculate()\"]\n  F -> H\n  E -> H  [label = \"get_p_value()\"]\n  H -> I  [label = \"Interpréter la p-value\"]\n\n\n}","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
 </td>
 <td>
 <p>Ainsi, pour réaliser un test de Student avec <code>infer</code>, on
@@ -939,7 +939,7 @@ style="background-color: #ffffba; padding: 2px;">distribution de la
 statistique</span></li>
 <li>calculer (“calculate”) la <span
 style="background-color: #ffdfba; padding: 2px;">distribution de la
-statistique sous hypothèse imme</span></li>
+statistique sous hypothèse nulle</span></li>
 <li>calculer (“calculate”) la <span
 style="background-color: #ffdfba; padding: 2px;">statistique
 observée</span></li>
@@ -986,7 +986,302 @@ et le fait que l’arbre ait été enchanté ou non, à l’aide d’un test de
 Student non-paramétrique réalisé avec le package infer:</p>
 </td>
 <td>
-<img src="Tests_stats_exo_files/figure-html/unnamed-chunk-5-1.png" width="384" />
+<p><img src="Tests_stats_exo_files/figure-html/unnamed-chunk-5-1.png" width="384" /></p>
+<pre><code>## List of 136
+##  $ line                            :List of 6
+##   ..$ colour       : chr &quot;black&quot;
+##   ..$ linewidth    : num 0.5
+##   ..$ linetype     : num 1
+##   ..$ lineend      : chr &quot;butt&quot;
+##   ..$ arrow        : logi FALSE
+##   ..$ inherit.blank: logi TRUE
+##   ..- attr(*, &quot;class&quot;)= chr [1:2] &quot;element_line&quot; &quot;element&quot;
+##  $ rect                            :List of 5
+##   ..$ fill         : chr &quot;white&quot;
+##   ..$ colour       : chr &quot;black&quot;
+##   ..$ linewidth    : num 0.5
+##   ..$ linetype     : num 1
+##   ..$ inherit.blank: logi TRUE
+##   ..- attr(*, &quot;class&quot;)= chr [1:2] &quot;element_rect&quot; &quot;element&quot;
+##  $ text                            :List of 11
+##   ..$ family       : chr &quot;&quot;
+##   ..$ face         : chr &quot;plain&quot;
+##   ..$ colour       : chr &quot;black&quot;
+##   ..$ size         : num 11
+##   ..$ hjust        : num 0.5
+##   ..$ vjust        : num 0.5
+##   ..$ angle        : num 0
+##   ..$ lineheight   : num 0.9
+##   ..$ margin       : &#39;margin&#39; num [1:4] 0points 0points 0points 0points
+##   .. ..- attr(*, &quot;unit&quot;)= int 8
+##   ..$ debug        : logi FALSE
+##   ..$ inherit.blank: logi TRUE
+##   ..- attr(*, &quot;class&quot;)= chr [1:2] &quot;element_text&quot; &quot;element&quot;
+##  $ title                           : NULL
+##  $ aspect.ratio                    : NULL
+##  $ axis.title                      : NULL
+##  $ axis.title.x                    :List of 11
+##   ..$ family       : NULL
+##   ..$ face         : NULL
+##   ..$ colour       : NULL
+##   ..$ size         : NULL
+##   ..$ hjust        : NULL
+##   ..$ vjust        : num 1
+##   ..$ angle        : NULL
+##   ..$ lineheight   : NULL
+##   ..$ margin       : &#39;margin&#39; num [1:4] 2.75points 0points 0points 0points
+##   .. ..- attr(*, &quot;unit&quot;)= int 8
+##   ..$ debug        : NULL
+##   ..$ inherit.blank: logi TRUE
+##   ..- attr(*, &quot;class&quot;)= chr [1:2] &quot;element_text&quot; &quot;element&quot;
+##  $ axis.title.x.top                :List of 11
+##   ..$ family       : NULL
+##   ..$ face         : NULL
+##   ..$ colour       : NULL
+##   ..$ size         : NULL
+##   ..$ hjust        : NULL
+##   ..$ vjust        : num 0
+##   ..$ angle        : NULL
+##   ..$ lineheight   : NULL
+##   ..$ margin       : &#39;margin&#39; num [1:4] 0points 0points 2.75points 0points
+##   .. ..- attr(*, &quot;unit&quot;)= int 8
+##   ..$ debug        : NULL
+##   ..$ inherit.blank: logi TRUE
+##   ..- attr(*, &quot;class&quot;)= chr [1:2] &quot;element_text&quot; &quot;element&quot;
+##  $ axis.title.x.bottom             : NULL
+##  $ axis.title.y                    :List of 11
+##   ..$ family       : NULL
+##   ..$ face         : NULL
+##   ..$ colour       : NULL
+##   ..$ size         : NULL
+##   ..$ hjust        : NULL
+##   ..$ vjust        : num 1
+##   ..$ angle        : num 90
+##   ..$ lineheight   : NULL
+##   ..$ margin       : &#39;margin&#39; num [1:4] 0points 2.75points 0points 0points
+##   .. ..- attr(*, &quot;unit&quot;)= int 8
+##   ..$ debug        : NULL
+##   ..$ inherit.blank: logi TRUE
+##   ..- attr(*, &quot;class&quot;)= chr [1:2] &quot;element_text&quot; &quot;element&quot;
+##  $ axis.title.y.left               : NULL
+##  $ axis.title.y.right              :List of 11
+##   ..$ family       : NULL
+##   ..$ face         : NULL
+##   ..$ colour       : NULL
+##   ..$ size         : NULL
+##   ..$ hjust        : NULL
+##   ..$ vjust        : num 1
+##   ..$ angle        : num -90
+##   ..$ lineheight   : NULL
+##   ..$ margin       : &#39;margin&#39; num [1:4] 0points 0points 0points 2.75points
+##   .. ..- attr(*, &quot;unit&quot;)= int 8
+##   ..$ debug        : NULL
+##   ..$ inherit.blank: logi TRUE
+##   ..- attr(*, &quot;class&quot;)= chr [1:2] &quot;element_text&quot; &quot;element&quot;
+##  $ axis.text                       :List of 11
+##   ..$ family       : NULL
+##   ..$ face         : NULL
+##   ..$ colour       : chr &quot;grey30&quot;
+##   ..$ size         : &#39;rel&#39; num 0.8
+##   ..$ hjust        : NULL
+##   ..$ vjust        : NULL
+##   ..$ angle        : NULL
+##   ..$ lineheight   : NULL
+##   ..$ margin       : NULL
+##   ..$ debug        : NULL
+##   ..$ inherit.blank: logi TRUE
+##   ..- attr(*, &quot;class&quot;)= chr [1:2] &quot;element_text&quot; &quot;element&quot;
+##  $ axis.text.x                     :List of 11
+##   ..$ family       : NULL
+##   ..$ face         : NULL
+##   ..$ colour       : NULL
+##   ..$ size         : NULL
+##   ..$ hjust        : NULL
+##   ..$ vjust        : num 1
+##   ..$ angle        : NULL
+##   ..$ lineheight   : NULL
+##   ..$ margin       : &#39;margin&#39; num [1:4] 2.2points 0points 0points 0points
+##   .. ..- attr(*, &quot;unit&quot;)= int 8
+##   ..$ debug        : NULL
+##   ..$ inherit.blank: logi TRUE
+##   ..- attr(*, &quot;class&quot;)= chr [1:2] &quot;element_text&quot; &quot;element&quot;
+##  $ axis.text.x.top                 :List of 11
+##   ..$ family       : NULL
+##   ..$ face         : NULL
+##   ..$ colour       : NULL
+##   ..$ size         : NULL
+##   ..$ hjust        : NULL
+##   ..$ vjust        : num 0
+##   ..$ angle        : NULL
+##   ..$ lineheight   : NULL
+##   ..$ margin       : &#39;margin&#39; num [1:4] 0points 0points 2.2points 0points
+##   .. ..- attr(*, &quot;unit&quot;)= int 8
+##   ..$ debug        : NULL
+##   ..$ inherit.blank: logi TRUE
+##   ..- attr(*, &quot;class&quot;)= chr [1:2] &quot;element_text&quot; &quot;element&quot;
+##  $ axis.text.x.bottom              : NULL
+##  $ axis.text.y                     :List of 11
+##   ..$ family       : NULL
+##   ..$ face         : NULL
+##   ..$ colour       : NULL
+##   ..$ size         : NULL
+##   ..$ hjust        : num 1
+##   ..$ vjust        : NULL
+##   ..$ angle        : NULL
+##   ..$ lineheight   : NULL
+##   ..$ margin       : &#39;margin&#39; num [1:4] 0points 2.2points 0points 0points
+##   .. ..- attr(*, &quot;unit&quot;)= int 8
+##   ..$ debug        : NULL
+##   ..$ inherit.blank: logi TRUE
+##   ..- attr(*, &quot;class&quot;)= chr [1:2] &quot;element_text&quot; &quot;element&quot;
+##  $ axis.text.y.left                : NULL
+##  $ axis.text.y.right               :List of 11
+##   ..$ family       : NULL
+##   ..$ face         : NULL
+##   ..$ colour       : NULL
+##   ..$ size         : NULL
+##   ..$ hjust        : num 0
+##   ..$ vjust        : NULL
+##   ..$ angle        : NULL
+##   ..$ lineheight   : NULL
+##   ..$ margin       : &#39;margin&#39; num [1:4] 0points 0points 0points 2.2points
+##   .. ..- attr(*, &quot;unit&quot;)= int 8
+##   ..$ debug        : NULL
+##   ..$ inherit.blank: logi TRUE
+##   ..- attr(*, &quot;class&quot;)= chr [1:2] &quot;element_text&quot; &quot;element&quot;
+##  $ axis.text.theta                 : NULL
+##  $ axis.text.r                     :List of 11
+##   ..$ family       : NULL
+##   ..$ face         : NULL
+##   ..$ colour       : NULL
+##   ..$ size         : NULL
+##   ..$ hjust        : num 0.5
+##   ..$ vjust        : NULL
+##   ..$ angle        : NULL
+##   ..$ lineheight   : NULL
+##   ..$ margin       : &#39;margin&#39; num [1:4] 0points 2.2points 0points 2.2points
+##   .. ..- attr(*, &quot;unit&quot;)= int 8
+##   ..$ debug        : NULL
+##   ..$ inherit.blank: logi TRUE
+##   ..- attr(*, &quot;class&quot;)= chr [1:2] &quot;element_text&quot; &quot;element&quot;
+##  $ axis.ticks                      : list()
+##   ..- attr(*, &quot;class&quot;)= chr [1:2] &quot;element_blank&quot; &quot;element&quot;
+##  $ axis.ticks.x                    : NULL
+##  $ axis.ticks.x.top                : NULL
+##  $ axis.ticks.x.bottom             : NULL
+##  $ axis.ticks.y                    : NULL
+##  $ axis.ticks.y.left               : NULL
+##  $ axis.ticks.y.right              : NULL
+##  $ axis.ticks.theta                : NULL
+##  $ axis.ticks.r                    : NULL
+##  $ axis.minor.ticks.x.top          : NULL
+##  $ axis.minor.ticks.x.bottom       : NULL
+##  $ axis.minor.ticks.y.left         : NULL
+##  $ axis.minor.ticks.y.right        : NULL
+##  $ axis.minor.ticks.theta          : NULL
+##  $ axis.minor.ticks.r              : NULL
+##  $ axis.ticks.length               : &#39;simpleUnit&#39; num 2.75points
+##   ..- attr(*, &quot;unit&quot;)= int 8
+##  $ axis.ticks.length.x             : NULL
+##  $ axis.ticks.length.x.top         : NULL
+##  $ axis.ticks.length.x.bottom      : NULL
+##  $ axis.ticks.length.y             : NULL
+##  $ axis.ticks.length.y.left        : NULL
+##  $ axis.ticks.length.y.right       : NULL
+##  $ axis.ticks.length.theta         : NULL
+##  $ axis.ticks.length.r             : NULL
+##  $ axis.minor.ticks.length         : &#39;rel&#39; num 0.75
+##  $ axis.minor.ticks.length.x       : NULL
+##  $ axis.minor.ticks.length.x.top   : NULL
+##  $ axis.minor.ticks.length.x.bottom: NULL
+##  $ axis.minor.ticks.length.y       : NULL
+##  $ axis.minor.ticks.length.y.left  : NULL
+##  $ axis.minor.ticks.length.y.right : NULL
+##  $ axis.minor.ticks.length.theta   : NULL
+##  $ axis.minor.ticks.length.r       : NULL
+##  $ axis.line                       : list()
+##   ..- attr(*, &quot;class&quot;)= chr [1:2] &quot;element_blank&quot; &quot;element&quot;
+##  $ axis.line.x                     : NULL
+##  $ axis.line.x.top                 : NULL
+##  $ axis.line.x.bottom              : NULL
+##  $ axis.line.y                     : NULL
+##  $ axis.line.y.left                : NULL
+##  $ axis.line.y.right               : NULL
+##  $ axis.line.theta                 : NULL
+##  $ axis.line.r                     : NULL
+##  $ legend.background               : list()
+##   ..- attr(*, &quot;class&quot;)= chr [1:2] &quot;element_blank&quot; &quot;element&quot;
+##  $ legend.margin                   : &#39;margin&#39; num [1:4] 5.5points 5.5points 5.5points 5.5points
+##   ..- attr(*, &quot;unit&quot;)= int 8
+##  $ legend.spacing                  : &#39;simpleUnit&#39; num 11points
+##   ..- attr(*, &quot;unit&quot;)= int 8
+##  $ legend.spacing.x                : NULL
+##  $ legend.spacing.y                : NULL
+##  $ legend.key                      : list()
+##   ..- attr(*, &quot;class&quot;)= chr [1:2] &quot;element_blank&quot; &quot;element&quot;
+##  $ legend.key.size                 : &#39;simpleUnit&#39; num 1.2lines
+##   ..- attr(*, &quot;unit&quot;)= int 3
+##  $ legend.key.height               : NULL
+##  $ legend.key.width                : NULL
+##  $ legend.key.spacing              : &#39;simpleUnit&#39; num 5.5points
+##   ..- attr(*, &quot;unit&quot;)= int 8
+##  $ legend.key.spacing.x            : NULL
+##  $ legend.key.spacing.y            : NULL
+##  $ legend.frame                    : NULL
+##  $ legend.ticks                    : NULL
+##  $ legend.ticks.length             : &#39;rel&#39; num 0.2
+##  $ legend.axis.line                : NULL
+##  $ legend.text                     :List of 11
+##   ..$ family       : NULL
+##   ..$ face         : NULL
+##   ..$ colour       : NULL
+##   ..$ size         : &#39;rel&#39; num 0.8
+##   ..$ hjust        : NULL
+##   ..$ vjust        : NULL
+##   ..$ angle        : NULL
+##   ..$ lineheight   : NULL
+##   ..$ margin       : NULL
+##   ..$ debug        : NULL
+##   ..$ inherit.blank: logi TRUE
+##   ..- attr(*, &quot;class&quot;)= chr [1:2] &quot;element_text&quot; &quot;element&quot;
+##  $ legend.text.position            : NULL
+##  $ legend.title                    :List of 11
+##   ..$ family       : NULL
+##   ..$ face         : NULL
+##   ..$ colour       : NULL
+##   ..$ size         : NULL
+##   ..$ hjust        : num 0
+##   ..$ vjust        : NULL
+##   ..$ angle        : NULL
+##   ..$ lineheight   : NULL
+##   ..$ margin       : NULL
+##   ..$ debug        : NULL
+##   ..$ inherit.blank: logi TRUE
+##   ..- attr(*, &quot;class&quot;)= chr [1:2] &quot;element_text&quot; &quot;element&quot;
+##  $ legend.title.position           : NULL
+##  $ legend.position                 : chr &quot;right&quot;
+##  $ legend.position.inside          : NULL
+##  $ legend.direction                : NULL
+##  $ legend.byrow                    : NULL
+##  $ legend.justification            : chr &quot;center&quot;
+##  $ legend.justification.top        : NULL
+##  $ legend.justification.bottom     : NULL
+##  $ legend.justification.left       : NULL
+##  $ legend.justification.right      : NULL
+##  $ legend.justification.inside     : NULL
+##  $ legend.location                 : NULL
+##  $ legend.box                      : NULL
+##  $ legend.box.just                 : NULL
+##  $ legend.box.margin               : &#39;margin&#39; num [1:4] 0cm 0cm 0cm 0cm
+##   ..- attr(*, &quot;unit&quot;)= int 1
+##  $ legend.box.background           : list()
+##   ..- attr(*, &quot;class&quot;)= chr [1:2] &quot;element_blank&quot; &quot;element&quot;
+##  $ legend.box.spacing              : &#39;simpleUnit&#39; num 11points
+##   ..- attr(*, &quot;unit&quot;)= int 8
+##   [list output truncated]
+##  - attr(*, &quot;class&quot;)= chr [1:2] &quot;theme&quot; &quot;gg&quot;
+##  - attr(*, &quot;complete&quot;)= logi TRUE
+##  - attr(*, &quot;validate&quot;)= logi TRUE</code></pre>
 </td>
 </tr>
 </table>
@@ -1398,7 +1693,7 @@ tableau <code>chateauxEtBoulots</code></p>
   geom_bar()+
   scale_fill_manual(values=c(&quot;bleue&quot;=&quot;#88aed0&quot;, &quot;rose&quot;=&quot;#d088ae&quot;,&quot;noire&quot;=&quot;#000000&quot;,
                              &quot;verte&quot;=&quot;#aed088&quot;,&quot;grise&quot;=&quot;#aaaaaa&quot;))</code></pre>
-<p><img src="Tests_stats_exo_files/figure-html/unnamed-chunk-15-1.png" width="624" /></p>
+<p><img src="Tests_stats_exo_files/figure-html/unnamed-chunk-15-1.png" width="576" /></p>
 <p>Réalisez un <strong>test du Chi-2 pour tester le lien</strong>:</p>
 <div class="tutorial-exercise" data-label="mages" data-completion="1"
 data-diagnostics="1" data-startover="1" data-lines="0"
@@ -1455,8 +1750,8 @@ facteur (aussi déséquilibrés et faibles soient-ils).</p>
 <col width="40%">
 <tr>
 <td>
-<div class="grViz html-widget html-fill-item" id="htmlwidget-504ba17aa38e88093896" style="width:480px;height:480px;"></div>
-<script type="application/json" data-for="htmlwidget-504ba17aa38e88093896">{"x":{"diagram":"digraph infer_workflow {\n  graph [layout = dot, rankdir = TB]\n\n  # Definir les nœuds\n  node [shape = rectangle, style = filled, color = lightblue]\n  A [color=\"#bae1ff\",label = \"Données\n(tableau initial)\"]\n  B [color=\"#bae1ff\", label = \"Données + Modèle Y~X\"]\n  C [color=\"#ffffb9\", label = \"Hypothèse nulle\nH0\"]\n  D [color=\"#ffffb9\", label = \"Données permutées\"]\n  H [color=\"#ffb3ba\",label = \"p-value\"]\n  I [style=solid,color=black,label = \"Rejet ou non de H0\"]\n  \n  \n  subgraph cluster_EF {\n    label = \"\";\n    style = filled;\n    color = gray;\n    node [shape = rectangle, style = filled, color = yellow];\n  E [color=\"#ffdfba\", label = \"Distribution de la statistique\nsous hypothèse nulle\"]\n  F [color=\"#ffdfba\", label = \"Statistique observée\"]\n \n  }\n\n  # Ajouter les connexions principales\n  A -> B  [label = \"specify()\"]\n\n  B -> C  [label = \"hypothesize()\"]\n  C -> D  [style = dashed, label = \"generate()\"]\n  D -> E  [style = dashed, label=\"calculate()\"]\n \n  \n  B -> F  [label = \"calculate()\"]\n  F -> H\n  E -> H  [label = \"get_p_value()\"]\n  H -> I  [label = \"Interpréter la p-value\"]\n\n\n}","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
+<div class="grViz html-widget html-fill-item" id="htmlwidget-f0383ef81a069ed1667e" style="width:480px;height:480px;"></div>
+<script type="application/json" data-for="htmlwidget-f0383ef81a069ed1667e">{"x":{"diagram":"digraph infer_workflow {\n  graph [layout = dot, rankdir = TB]\n\n  # Definir les nœuds\n  node [shape = rectangle, style = filled, color = lightblue]\n  A [color=\"#bae1ff\",label = \"Données\n(tableau initial)\"]\n  B [color=\"#bae1ff\", label = \"Données + Modèle Y~X\"]\n  C [color=\"#ffffb9\", label = \"Hypothèse nulle\nH0\"]\n  D [color=\"#ffffb9\", label = \"Données permutées\"]\n  H [color=\"#ffb3ba\",label = \"p-value\"]\n  I [style=solid,color=black,label = \"Rejet ou non de H0\"]\n  \n  \n  subgraph cluster_EF {\n    label = \"\";\n    style = filled;\n    color = gray;\n    node [shape = rectangle, style = filled, color = yellow];\n  E [color=\"#ffdfba\", label = \"Distribution de la statistique\nsous hypothèse nulle\"]\n  F [color=\"#ffdfba\", label = \"Statistique observée\"]\n \n  }\n\n  # Ajouter les connexions principales\n  A -> B  [label = \"specify()\"]\n\n  B -> C  [label = \"hypothesize()\"]\n  C -> D  [style = dashed, label = \"generate()\"]\n  D -> E  [style = dashed, label=\"calculate()\"]\n \n  \n  B -> F  [label = \"calculate()\"]\n  F -> H\n  E -> H  [label = \"get_p_value()\"]\n  H -> I  [label = \"Interpréter la p-value\"]\n\n\n}","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
 </td>
 <td>
 <p>Ainsi, pour réaliser un test de Student avec <code>infer</code>, on
@@ -1476,7 +1771,7 @@ style="background-color: #ffffba; padding: 2px;">distribution de la
 statistique</span></li>
 <li>calculer (“calculate”) la <span
 style="background-color: #ffdfba; padding: 2px;">distribution de la
-statistique sous hypothèse imme</span></li>
+statistique sous hypothèse nulle</span></li>
 <li>calculer (“calculate”) la <span
 style="background-color: #ffdfba; padding: 2px;">statistique
 observée</span></li>
@@ -1681,20 +1976,20 @@ learnr:::store_exercise_cache(structure(list(label = "decouvre_exos", global_set
 <script type="application/shiny-prerendered" data-context="server">
 learnr:::question_prerendered_chunk(structure(list(type = "learnr_checkbox", label = "usages_R", 
     question = structure("Que venez-vous faire ici?", html = TRUE, class = c("html", 
-    "character")), answers = list(structure(list(id = "lnr_ans_d136f91", 
+    "character")), answers = list(structure(list(id = "lnr_ans_28a8204", 
         option = "comprendre les tests statistiques", value = "comprendre les tests statistiques", 
         label = structure("comprendre les tests statistiques", html = TRUE, class = c("html", 
         "character")), correct = TRUE, message = NULL, type = "literal"), class = c("tutorial_question_answer", 
-    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_68d33e4", 
+    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_f481240", 
         option = "préparer mes prochaines vacances", value = "préparer mes prochaines vacances", 
         label = structure("préparer mes prochaines vacances", html = TRUE, class = c("html", 
         "character")), correct = FALSE, message = NULL, type = "literal"), class = c("tutorial_question_answer", 
-    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_934024c", 
+    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_7e0d45", 
         option = "mettre en oeuvre des tests statistiques avec R", 
         value = "mettre en oeuvre des tests statistiques avec R", 
         label = structure("mettre en oeuvre des tests statistiques avec R", html = TRUE, class = c("html", 
         "character")), correct = TRUE, message = NULL, type = "literal"), class = c("tutorial_question_answer", 
-    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_2d32e84", 
+    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_18a3610", 
         option = "apprendre à faire de délicieuses lasagnes", 
         value = "apprendre à faire de délicieuses lasagnes", 
         label = structure("apprendre à faire de délicieuses lasagnes", html = TRUE, class = c("html", 
@@ -1706,7 +2001,7 @@ learnr:::question_prerendered_chunk(structure(list(type = "learnr_checkbox", lab
     "character")), incorrect = structure("Seules deux de ces propositions sont correctes", html = TRUE, class = c("html", 
     "character")), message = NULL, post_message = NULL), ids = list(
         answer = "usages_R-answer", question = "usages_R"), loading = NULL, 
-    random_answer_order = FALSE, allow_retry = TRUE, seed = 1103029128.48636, 
+    random_answer_order = FALSE, allow_retry = TRUE, seed = 1362367762.3656, 
     options = list()), class = c("learnr_checkbox", "tutorial_question"
 )), session = session)
 </script>
@@ -1715,17 +2010,17 @@ learnr:::question_prerendered_chunk(structure(list(type = "learnr_checkbox", lab
 <script type="application/shiny-prerendered" data-context="server">
 learnr:::question_prerendered_chunk(structure(list(type = "learnr_radio", label = "inference_mentale", 
     question = structure("Est-ce un effet réel ou simplement dû au hasard, à votre avis? (plusieurs réponses possibles)", html = TRUE, class = c("html", 
-    "character")), answers = list(structure(list(id = "lnr_ans_649165f", 
+    "character")), answers = list(structure(list(id = "lnr_ans_7333815", 
         option = "Probablement <b>lié au hasard<\u002fb>, car les distributions des deux groupes ne sont <b>pas totalement disjointes<\u002fb>.", 
         value = "Probablement <b>lié au hasard<\u002fb>, car les distributions des deux groupes ne sont <b>pas totalement disjointes<\u002fb>.", 
         label = structure("Probablement <b>lié au hasard<\u002fb>, car les distributions des deux groupes ne sont <b>pas totalement disjointes<\u002fb>.", html = TRUE, class = c("html", 
         "character")), correct = FALSE, message = NULL, type = "literal"), class = c("tutorial_question_answer", 
-    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_49af1b7", 
+    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_5348149", 
         option = "Probablement <b>lié au hasard<\u002fb>, car les échantillons sont de <b>tailles très inégales.<\u002fb>", 
         value = "Probablement <b>lié au hasard<\u002fb>, car les échantillons sont de <b>tailles très inégales.<\u002fb>", 
         label = structure("Probablement <b>lié au hasard<\u002fb>, car les échantillons sont de <b>tailles très inégales.<\u002fb>", html = TRUE, class = c("html", 
         "character")), correct = FALSE, message = NULL, type = "literal"), class = c("tutorial_question_answer", 
-    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_1b69cd4", 
+    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_56a8043", 
         option = "Probablement <b>réel<\u002fb>, car les <b>tailles d'échantillon sont relativement importantes<\u002fb>", 
         value = "Probablement <b>réel<\u002fb>, car les <b>tailles d'échantillon sont relativement importantes<\u002fb>", 
         label = structure("Probablement <b>réel<\u002fb>, car les <b>tailles d’échantillon sont relativement importantes<\u002fb>", html = TRUE, class = c("html", 
@@ -1738,39 +2033,39 @@ learnr:::question_prerendered_chunk(structure(list(type = "learnr_radio", label 
     "character")), message = NULL, post_message = NULL), ids = list(
         answer = "inference_mentale-answer", question = "inference_mentale"), 
     loading = NULL, random_answer_order = FALSE, allow_retry = TRUE, 
-    seed = 1056573915.50799, options = list()), class = c("learnr_radio", 
+    seed = 1795380168.66396, options = list()), class = c("learnr_radio", 
 "tutorial_question")), session = session)
 </script>
  
 <script type="application/shiny-prerendered" data-context="server">
 learnr:::question_prerendered_chunk(structure(list(type = "learnr_checkbox", label = "ttest_questions2", 
     question = structure("Cochez les affirmations correctes", html = TRUE, class = c("html", 
-    "character")), answers = list(structure(list(id = "lnr_ans_22b3a0d", 
+    "character")), answers = list(structure(list(id = "lnr_ans_afc8bb6", 
         option = "La valeur de la <b>statistique observée<\u002fb> dépend des <b>données<\u002fb>", 
         value = "La valeur de la <b>statistique observée<\u002fb> dépend des <b>données<\u002fb>", 
         label = structure("La valeur de la <b>statistique observée<\u002fb> dépend des <b>données<\u002fb>", html = TRUE, class = c("html", 
         "character")), correct = TRUE, message = NULL, type = "literal"), class = c("tutorial_question_answer", 
-    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_6acf8ae", 
+    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_b33017e", 
         option = "La <b>distribution de la statistique T sous hypothèse H0<\u002fb> est une <b>distribution de Student<\u002fb> et ne dépend <b>pas<\u002fb> des données", 
         value = "La <b>distribution de la statistique T sous hypothèse H0<\u002fb> est une <b>distribution de Student<\u002fb> et ne dépend <b>pas<\u002fb> des données", 
         label = structure("La <b>distribution de la statistique T sous hypothèse H0<\u002fb> est une <b>distribution de Student<\u002fb> et ne dépend <b>pas<\u002fb> des données", html = TRUE, class = c("html", 
         "character")), correct = FALSE, message = NULL, type = "literal"), class = c("tutorial_question_answer", 
-    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_2b3efc1", 
+    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_eefe225", 
         option = "La <b>p-value<\u002fb> peut prendre des valeurs entre <b>-1 et 1<\u002fb>.", 
         value = "La <b>p-value<\u002fb> peut prendre des valeurs entre <b>-1 et 1<\u002fb>.", 
         label = structure("La <b>p-value<\u002fb> peut prendre des valeurs entre <b>-1 et 1<\u002fb>.", html = TRUE, class = c("html", 
         "character")), correct = FALSE, message = NULL, type = "literal"), class = c("tutorial_question_answer", 
-    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_9f2e85f", 
+    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_8244edb", 
         option = "Plus la p-value est <b>proche de 0<\u002fb>, plus il y a des chances que l'on <b>rejette H0<\u002fb>", 
         value = "Plus la p-value est <b>proche de 0<\u002fb>, plus il y a des chances que l'on <b>rejette H0<\u002fb>", 
         label = structure("Plus la p-value est <b>proche de 0<\u002fb>, plus il y a des chances que l’on <b>rejette H0<\u002fb>", html = TRUE, class = c("html", 
         "character")), correct = TRUE, message = NULL, type = "literal"), class = c("tutorial_question_answer", 
-    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_36b64c1", 
+    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_95e621e", 
         option = "Si la p-value est égale à <b>0.04<\u002fb>, alors je peux <b>rejeter H0<\u002fb> au seuil de <b>5%<\u002fb> et conclure à un <b>effet significatif<\u002fb>", 
         value = "Si la p-value est égale à <b>0.04<\u002fb>, alors je peux <b>rejeter H0<\u002fb> au seuil de <b>5%<\u002fb> et conclure à un <b>effet significatif<\u002fb>", 
         label = structure("Si la p-value est égale à <b>0.04<\u002fb>, alors je peux <b>rejeter H0<\u002fb> au seuil de <b>5%<\u002fb> et conclure à un <b>effet significatif<\u002fb>", html = TRUE, class = c("html", 
         "character")), correct = TRUE, message = NULL, type = "literal"), class = c("tutorial_question_answer", 
-    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_31fb3dc", 
+    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_ca4cc4c", 
         option = "Si la p-value est égale à <b>0.1<\u002fb>, alors je peux <b>rejeter H0<\u002fb> au seuil de <b>5%<\u002fb> et conclure à un <b>effet significatif<\u002fb>", 
         value = "Si la p-value est égale à <b>0.1<\u002fb>, alors je peux <b>rejeter H0<\u002fb> au seuil de <b>5%<\u002fb> et conclure à un <b>effet significatif<\u002fb>", 
         label = structure("Si la p-value est égale à <b>0.1<\u002fb>, alors je peux <b>rejeter H0<\u002fb> au seuil de <b>5%<\u002fb> et conclure à un <b>effet significatif<\u002fb>", html = TRUE, class = c("html", 
@@ -1783,7 +2078,7 @@ learnr:::question_prerendered_chunk(structure(list(type = "learnr_checkbox", lab
     "character")), message = NULL, post_message = NULL), ids = list(
         answer = "ttest_questions2-answer", question = "ttest_questions2"), 
     loading = NULL, random_answer_order = FALSE, allow_retry = TRUE, 
-    seed = 591790901.724426, options = list()), class = c("learnr_checkbox", 
+    seed = 1229161232.42763, options = list()), class = c("learnr_checkbox", 
 "tutorial_question")), session = session)
 </script>
 
@@ -1791,26 +2086,26 @@ learnr:::question_prerendered_chunk(structure(list(type = "learnr_checkbox", lab
 <script type="application/shiny-prerendered" data-context="server">
 learnr:::question_prerendered_chunk(structure(list(type = "learnr_checkbox", label = "ttest_questions3", 
     question = structure("Cochez les affirmations correctes", html = TRUE, class = c("html", 
-    "character")), answers = list(structure(list(id = "lnr_ans_eee2fb5", 
+    "character")), answers = list(structure(list(id = "lnr_ans_c2a63c5", 
         option = "Les tests statistiques permettent (quand ils sont appliqués correctement) de <b>ne jamais faire d'erreur d'interprétation<\u002fb>.", 
         value = "Les tests statistiques permettent (quand ils sont appliqués correctement) de <b>ne jamais faire d'erreur d'interprétation<\u002fb>.", 
         label = structure("Les tests statistiques permettent (quand ils sont appliqués correctement) de <b>ne jamais faire d’erreur d’interprétation<\u002fb>.", html = TRUE, class = c("html", 
         "character")), correct = FALSE, message = NULL, type = "literal"), class = c("tutorial_question_answer", 
-    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_66e6344", 
+    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_12d74cf", 
         option = "Quand on choisit le <b>seuil alpha<\u002fb> (par exemple 5%) pour réaliser un test, on choisit en fait le <b>risque d'erreur de type I<\u002fb>", 
         value = "Quand on choisit le <b>seuil alpha<\u002fb> (par exemple 5%) pour réaliser un test, on choisit en fait le <b>risque d'erreur de type I<\u002fb>", 
         label = structure("Quand on choisit le <b>seuil alpha<\u002fb> (par exemple 5%) pour réaliser un test, on choisit en fait le <b>risque d’erreur de type I<\u002fb>", html = TRUE, class = c("html", 
         "character")), correct = TRUE, message = NULL, type = "literal"), class = c("tutorial_question_answer", 
-    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_7b3782b", 
+    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_5969b6e", 
         option = "<b>beta=1-alpha<\u002fb>", value = "<b>beta=1-alpha<\u002fb>", 
         label = structure("<b>beta=1-alpha<\u002fb>", html = TRUE, class = c("html", 
         "character")), correct = FALSE, message = NULL, type = "literal"), class = c("tutorial_question_answer", 
-    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_dd5ef69", 
+    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_a5fbf2d", 
         option = "Généralement, on cherche à <b>valider H0<\u002fb>", 
         value = "Généralement, on cherche à <b>valider H0<\u002fb>", 
         label = structure("Généralement, on cherche à <b>valider H0<\u002fb>", html = TRUE, class = c("html", 
         "character")), correct = FALSE, message = NULL, type = "literal"), class = c("tutorial_question_answer", 
-    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_1d70cb6", 
+    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_f03d2f9", 
         option = "Généralement, on cherche à 'prouver' qu'il <b>existe un effet de X sur Y<\u002fb>", 
         value = "Généralement, on cherche à 'prouver' qu'il <b>existe un effet de X sur Y<\u002fb>", 
         label = structure("Généralement, on cherche à ‘prouver’ qu’il <b>existe un effet de X sur Y<\u002fb>", html = TRUE, class = c("html", 
@@ -1823,7 +2118,7 @@ learnr:::question_prerendered_chunk(structure(list(type = "learnr_checkbox", lab
     "character")), message = NULL, post_message = NULL), ids = list(
         answer = "ttest_questions3-answer", question = "ttest_questions3"), 
     loading = NULL, random_answer_order = FALSE, allow_retry = TRUE, 
-    seed = 96834927.4549077, options = list()), class = c("learnr_checkbox", 
+    seed = 1859531784.13409, options = list()), class = c("learnr_checkbox", 
 "tutorial_question")), session = session)
 </script>
  
@@ -1884,22 +2179,22 @@ learnr:::store_exercise_cache(structure(list(label = "ttest_exo1", global_setup 
 <script type="application/shiny-prerendered" data-context="server">
 learnr:::question_prerendered_chunk(structure(list(type = "learnr_radio", label = "ttest_questions1", 
     question = structure("Le résultat du test ci-dessus permet de", html = TRUE, class = c("html", 
-    "character")), answers = list(structure(list(id = "lnr_ans_af6066", 
+    "character")), answers = list(structure(list(id = "lnr_ans_ee16b02", 
         option = "<b>rejeter<\u002fb> l'hypothèse H_0: donc la quantité de perlimpinpin <b>n'est pas liée<\u002fb> à l'enchantement des chênes", 
         value = "<b>rejeter<\u002fb> l'hypothèse H_0: donc la quantité de perlimpinpin <b>n'est pas liée<\u002fb> à l'enchantement des chênes", 
         label = structure("<b>rejeter<\u002fb> l’hypothèse H_0: donc la quantité de perlimpinpin <b>n’est pas liée<\u002fb> à l’enchantement des chênes", html = TRUE, class = c("html", 
         "character")), correct = FALSE, message = NULL, type = "literal"), class = c("tutorial_question_answer", 
-    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_ae5a71a", 
+    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_12936e7", 
         option = "<b>accepter<\u002fb> l'hypothèse H_0: donc la quantité de perlimpinpin <b>n'est pas liée<\u002fb> à l'enchantement des chênes", 
         value = "<b>accepter<\u002fb> l'hypothèse H_0: donc la quantité de perlimpinpin <b>n'est pas liée<\u002fb> à l'enchantement des chênes", 
         label = structure("<b>accepter<\u002fb> l’hypothèse H_0: donc la quantité de perlimpinpin <b>n’est pas liée<\u002fb> à l’enchantement des chênes", html = TRUE, class = c("html", 
         "character")), correct = FALSE, message = NULL, type = "literal"), class = c("tutorial_question_answer", 
-    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_bc0eee4", 
+    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_a25fd29", 
         option = "<b>rejeter<\u002fb> l'hypothèse H_0: donc la quantité de perlimpinpin <b>est liée<\u002fb> à l'enchantement des chênes", 
         value = "<b>rejeter<\u002fb> l'hypothèse H_0: donc la quantité de perlimpinpin <b>est liée<\u002fb> à l'enchantement des chênes", 
         label = structure("<b>rejeter<\u002fb> l’hypothèse H_0: donc la quantité de perlimpinpin <b>est liée<\u002fb> à l’enchantement des chênes", html = TRUE, class = c("html", 
         "character")), correct = TRUE, message = NULL, type = "literal"), class = c("tutorial_question_answer", 
-    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_f312418", 
+    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_c067c40", 
         option = "<b>accepter<\u002fb> l'hypothèse H_0: donc la quantité de perlimpinpin <b>est liée<\u002fb> à l'enchantement des chênes", 
         value = "<b>accepter<\u002fb> l'hypothèse H_0: donc la quantité de perlimpinpin <b>est liée<\u002fb> à l'enchantement des chênes", 
         label = structure("<b>accepter<\u002fb> l’hypothèse H_0: donc la quantité de perlimpinpin <b>est liée<\u002fb> à l’enchantement des chênes", html = TRUE, class = c("html", 
@@ -1912,7 +2207,7 @@ learnr:::question_prerendered_chunk(structure(list(type = "learnr_radio", label 
     "character")), message = NULL, post_message = NULL), ids = list(
         answer = "ttest_questions1-answer", question = "ttest_questions1"), 
     loading = NULL, random_answer_order = FALSE, allow_retry = TRUE, 
-    seed = 813389048.121236, options = list()), class = c("learnr_radio", 
+    seed = 514225614.260545, options = list()), class = c("learnr_radio", 
 "tutorial_question")), session = session)
 </script>
 
